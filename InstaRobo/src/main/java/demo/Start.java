@@ -15,10 +15,20 @@ import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 
 public class Start {
+	/*
+	 * O sistema esta programado para ir em 6 fotos diferentes para achar seguidores.
+	 * Caso não queira que ele va em 6, só precisa adcionar // no inicio da linha aonde
+	 * esta escrito "urlFotoX" e na linha  start(urlFotoX,driver);
+	 * O número 6 é o exemplo de uma foto que sera ignorada, caso deseje que ela seja executada
+	 * só é necessario remover a //
+	 */
 
 	private static String urlFoto1 = "https://www.instagram.com/p/BhiZGkhBoY1/?taken-by=rex2501";
 	private static String urlFoto2 = "https://www.instagram.com/p/BiHV4ZTHwRM/?taken-by=brunogarciayt";
 	private static String urlFoto3 = "https://www.instagram.com/p/BiX1SpAAclm/?taken-by=donas";
+	private static String urlFoto4 = "https://www.instagram.com/p/BhiZGkhBoY1/?taken-by=rex2501";
+	private static String urlFoto5 = "https://www.instagram.com/p/BiHV4ZTHwRM/?taken-by=brunogarciayt";
+	//private static String urlFoto6 = "https://www.instagram.com/p/BiX1SpAAclm/?taken-by=donas";
 	private final static String urlInsta = "https://www.instagram.com/accounts/login/";
 	private static String user = "gus2rodas";
 	private static String password = "homemdeferro22";
@@ -30,9 +40,12 @@ public class Start {
 		try {
 			logar(driver);
 			Thread.sleep(6000);
-			//start(urlFoto1, driver);
+			start(urlFoto1, driver);
 			start(urlFoto2, driver);
 			start(urlFoto3, driver);
+			start(urlFoto4, driver);
+			start(urlFoto5, driver);
+			//start(urlFoto6, driver);
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
@@ -41,24 +54,6 @@ public class Start {
 		}
 
 	}
-
-	// private static Runnable t1 = new Runnable(){
-	// public void run() {
-	// start(urlFoto1);
-	// }
-	// };
-	//
-	// private static Runnable t2 = new Runnable(){
-	// public void run() {
-	// start(urlFoto2);
-	// }
-	// };
-	//
-	// private static Runnable t3 = new Runnable(){
-	// public void run() {
-	// start(urlFoto3);
-	// }
-	// };
 
 	public static void start(String urlFoto, WebDriver driver) {
 		try {
