@@ -1,6 +1,7 @@
 package demo;
 
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -23,16 +24,17 @@ public class Start {
 	 * só é necessario remover a //
 	 */
 
-	private static String urlFoto1 = "https://www.instagram.com/p/BhiZGkhBoY1/?taken-by=rex2501";
-	private static String urlFoto2 = "https://www.instagram.com/p/BiHV4ZTHwRM/?taken-by=brunogarciayt";
-	private static String urlFoto3 = "https://www.instagram.com/p/BiX1SpAAclm/?taken-by=donas";
-	private static String urlFoto4 = "https://www.instagram.com/p/BhiZGkhBoY1/?taken-by=rex2501";
-	private static String urlFoto5 = "https://www.instagram.com/p/BiHV4ZTHwRM/?taken-by=brunogarciayt";
+	private static String urlFoto1 = "https://www.instagram.com/p/BhzucaJASDg/?taken-by=donas";
+	//private static String urlFoto2 = "https://www.instagram.com/p/BiHV4ZTHwRM/?taken-by=brunogarciayt";
+	//private static String urlFoto3 = "https://www.instagram.com/p/BiX1SpAAclm/?taken-by=donas";
+	//private static String urlFoto4 = "https://www.instagram.com/p/BhiZGkhBoY1/?taken-by=rex2501";
+	//private static String urlFoto5 = "https://www.instagram.com/p/BiHV4ZTHwRM/?taken-by=brunogarciayt";
 	//private static String urlFoto6 = "https://www.instagram.com/p/BiX1SpAAclm/?taken-by=donas";
 	private final static String urlInsta = "https://www.instagram.com/accounts/login/";
 	private static String user = "gus2rodas";
 	private static String password = "homemdeferro22";
-	private static int curtidas = 0;
+	private static int curtidasTotais = 0;
+	private static int perfisTotais = 0;
 
 	public static void main(String[] args) throws InterruptedException {
 		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
@@ -41,24 +43,26 @@ public class Start {
 			logar(driver);
 			Thread.sleep(6000);
 			start(urlFoto1, driver);
-			start(urlFoto2, driver);
-			start(urlFoto3, driver);
-			start(urlFoto4, driver);
-			start(urlFoto5, driver);
+			//start(urlFoto2, driver);
+			//start(urlFoto3, driver);
+			//start(urlFoto4, driver);
+			//start(urlFoto5, driver);
 			//start(urlFoto6, driver);
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {
 			driver.quit();
-			System.out.println("acabou cao, curtimos " + curtidas + " fotos!");
+			System.out.println("acabou cao, curtimos " + curtidasTotais + " fotos, passou por: "+ perfisTotais+ " perfis");
 		}
 
 	}
 
 	public static void start(String urlFoto, WebDriver driver) {
 		try {
+			System.out.println("Inicio do processo "+new Date());
 			driver.get(urlFoto);
 			curtidores(driver);
+			System.out.println("Fim do processo "+new Date());
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -81,6 +85,7 @@ public class Start {
 	}
 
 	public static void curtidores(WebDriver driver) {
+		int curtidas = 0;
 		try {
 			Actions actions = new Actions(driver);
 			String originalHandle = driver.getWindowHandle();
@@ -106,12 +111,14 @@ public class Start {
 						}
 					}
 				} catch (Exception e) {
-					System.out.println("Erro conta privada ou sem fotos");
 				} finally {
 					driver.close();
 					driver.switchTo().window(originalHandle);
 				}
 			}
+			curtidasTotais += curtidas;
+			perfisTotais += numPessoas;
+			System.out.println("curtidas: "+curtidas+" e perfis: "+numPessoas);
 		} catch (Exception e) {
 			System.out.println("Erro :" + e);
 		}
@@ -119,6 +126,7 @@ public class Start {
 
 	public static void scroll(WebDriver driver) {
 		try {
+			System.out.println("Inicio do processo de scroll "+new Date());
 			List<WebElement> pessoas = driver.findElements(By.cssSelector("._9irns._pg23k._jpwof._gvoze"));
 			int numPessoas = pessoas.size();
 			JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -134,6 +142,7 @@ public class Start {
 					break;
 				numPessoas = pessoas.size();
 			}
+			System.out.println("Fim do processo de scroll "+new Date());
 		} catch (Exception e) {
 			System.out.println(e);
 		}
