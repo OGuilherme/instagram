@@ -122,9 +122,6 @@ public class Start {
 					driver.switchTo().window(originalHandle);
 				}
 			}
-			if(curtidas != curtidasTotais) {
-				curtidasTotais += curtidas;
-			}
 			perfisTotais += numPessoas;
 			System.out.println("curtidas: " + curtidas + " e perfis: " + numPessoas);
 		} catch (Exception e) {
