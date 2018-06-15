@@ -31,8 +31,6 @@ public class Start {
 	private static String urlFoto5 = "https://www.instagram.com/p/BiHV4ZTHwRM/?taken-by=brunogarciayt";
 	private static String urlFoto6 = "https://www.instagram.com/p/BiX1SpAAclm/?taken-by=donas";
 	private final static String urlInsta = "https://www.instagram.com/accounts/login/";
-	private static String user = "gus2rodas";
-	private static String password = "homemdeferro22";
 	private static int curtidasTotais = 0;
 	private static int perfisTotais = 0;
 
