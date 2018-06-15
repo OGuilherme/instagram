@@ -17,19 +17,19 @@ import com.google.common.io.Resources;
 
 public class Start {
 	/*
-	 * O sistema esta programado para ir em 6 fotos diferentes para achar seguidores.
-	 * Caso não queira que ele va em 6, só precisa adcionar // no inicio da linha aonde
-	 * esta escrito "urlFotoX" e na linha  start(urlFotoX,driver);
-	 * O número 6 é o exemplo de uma foto que sera ignorada, caso deseje que ela seja executada
-	 * só é necessario remover a //
+	 * O sistema esta programado para ir em 6 fotos diferentes para achar
+	 * seguidores. Caso não queira que ele va em 6, só precisa adcionar // no inicio
+	 * da linha aonde esta escrito "urlFotoX" e na linha start(urlFotoX,driver); O
+	 * número 6 é o exemplo de uma foto que sera ignorada, caso deseje que ela seja
+	 * executada só é necessario remover a //
 	 */
 
-	private static String urlFoto1 = "https://www.instagram.com/p/BhzucaJASDg/?taken-by=donas";
-	//private static String urlFoto2 = "https://www.instagram.com/p/BiHV4ZTHwRM/?taken-by=brunogarciayt";
-	//private static String urlFoto3 = "https://www.instagram.com/p/BiX1SpAAclm/?taken-by=donas";
-	//private static String urlFoto4 = "https://www.instagram.com/p/BhiZGkhBoY1/?taken-by=rex2501";
-	//private static String urlFoto5 = "https://www.instagram.com/p/BiHV4ZTHwRM/?taken-by=brunogarciayt";
-	//private static String urlFoto6 = "https://www.instagram.com/p/BiX1SpAAclm/?taken-by=donas";
+	private static String urlFoto1 = "https://www.instagram.com/p/Bj5BaoYBU8j/?hl=pt-br&taken-by=lucaslucco";
+	private static String urlFoto2 = "https://www.instagram.com/p/Bj25U-PgbAB/?taken-by=luansantana";
+	private static String urlFoto3 = "https://www.instagram.com/p/BiX1SpAAclm/?taken-by=donas";
+	private static String urlFoto4 = "https://www.instagram.com/p/BhiZGkhBoY1/?taken-by=rex2501";
+	private static String urlFoto5 = "https://www.instagram.com/p/BiHV4ZTHwRM/?taken-by=brunogarciayt";
+	private static String urlFoto6 = "https://www.instagram.com/p/BiX1SpAAclm/?taken-by=donas";
 	private final static String urlInsta = "https://www.instagram.com/accounts/login/";
 	private static String user = "gus2rodas";
 	private static String password = "homemdeferro22";
@@ -43,7 +43,7 @@ public class Start {
 			logar(driver);
 			Thread.sleep(6000);
 			start(urlFoto1, driver);
-			//start(urlFoto2, driver);
+			start(urlFoto2, driver);
 			//start(urlFoto3, driver);
 			//start(urlFoto4, driver);
 			//start(urlFoto5, driver);
@@ -52,17 +52,18 @@ public class Start {
 			System.out.println(e);
 		} finally {
 			driver.quit();
-			System.out.println("acabou cao, curtimos " + curtidasTotais + " fotos, passou por: "+ perfisTotais+ " perfis");
+			System.out.println(
+					"acabou cao, curtimos " + curtidasTotais + " fotos, passou por: " + perfisTotais + " perfis");
 		}
 
 	}
 
 	public static void start(String urlFoto, WebDriver driver) {
 		try {
-			System.out.println("Inicio do processo "+new Date());
+			System.out.println("Inicio do processo " + new Date());
 			driver.get(urlFoto);
 			curtidores(driver);
-			System.out.println("Fim do processo "+new Date());
+			System.out.println("Fim do processo " + new Date());
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -70,17 +71,16 @@ public class Start {
 
 	public static void logar(WebDriver driver) {
 		Boolean isValid = false;
-		while (!isValid) {
-			try {
-				driver.get(urlInsta);
-				Thread.sleep(6000);
-				driver.findElement(By.name("username")).sendKeys(user);
-				driver.findElement(By.name("password")).sendKeys(password);
-				driver.findElement(By.cssSelector("._qv64e._gexxb")).click();
-				isValid = true;
-			} catch (Exception e) {
-				System.out.println("Aguarde");
+		driver.get(urlInsta);
+		try {
+			Thread.sleep(6000);
+			while (!isValid) {
+				if (!urlInsta.equalsIgnoreCase(driver.getCurrentUrl())) {
+					isValid = true;
+				}
 			}
+		} catch (Exception e) {
+			System.out.println("Aguarde");
 		}
 	}
 
@@ -89,36 +89,46 @@ public class Start {
 		try {
 			Actions actions = new Actions(driver);
 			String originalHandle = driver.getWindowHandle();
-			driver.findElement(By.cssSelector("._3gwk6._nt9ow a")).click();
+			driver.findElement(By.cssSelector(".zV_Nj")).click();
 			scroll(driver);
-			List<WebElement> pessoas = driver.findElements(By.cssSelector("._9irns._pg23k._jpwof._gvoze"));
+			List<WebElement> pessoas = driver.findElements(By.cssSelector(".UYK0S._2dbep.qNELH.kIKUG"));
 			int numPessoas = pessoas.size() - 1;
 			for (int i = 0; i <= numPessoas; i++) {
+				if (curtidasTotais > 1500) {
+					throw new Exception();
+				}
 				try {
 					actions.moveToElement(pessoas.get(i));
 					String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
 					pessoas.get(i).sendKeys(selectLinkOpeninNewTab);
 					Thread.sleep(1000);
 					for (String handle : driver.getWindowHandles()) {
+						if (curtidasTotais > 2500) {
+							break;
+						}
 						if (!handle.equals(originalHandle)) {
 							driver.switchTo().window(handle);
-							driver.findElement(By.cssSelector("._mck9w._gvoze._tn0ps a")).click();
+							driver.findElement(By.cssSelector(".v1Nh3.kIKUG._bz0w a")).click();
 							Thread.sleep(600);
 							if (possivelCurtir(driver)) {
-								driver.findElement(By.cssSelector("._eszkz._l9yih")).click();
-								curtidas ++;
+								driver.findElement(By.cssSelector(".Szr5J.coreSpriteHeartOpen")).click();
+								curtidas++;
+								curtidasTotais++;
 							}
 						}
 					}
 				} catch (Exception e) {
+					System.out.println(e.getMessage());
 				} finally {
 					driver.close();
 					driver.switchTo().window(originalHandle);
 				}
 			}
-			curtidasTotais += curtidas;
+			if(curtidas != curtidasTotais) {
+				curtidasTotais += curtidas;
+			}
 			perfisTotais += numPessoas;
-			System.out.println("curtidas: "+curtidas+" e perfis: "+numPessoas);
+			System.out.println("curtidas: " + curtidas + " e perfis: " + numPessoas);
 		} catch (Exception e) {
 			System.out.println("Erro :" + e);
 		}
@@ -126,8 +136,8 @@ public class Start {
 
 	public static void scroll(WebDriver driver) {
 		try {
-			System.out.println("Inicio do processo de scroll "+new Date());
-			List<WebElement> pessoas = driver.findElements(By.cssSelector("._9irns._pg23k._jpwof._gvoze"));
+			System.out.println("Inicio do processo de scroll " + new Date());
+			List<WebElement> pessoas = driver.findElements(By.cssSelector(".UYK0S._2dbep.qNELH.kIKUG"));
 			int numPessoas = pessoas.size();
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			URL jqueryUrl = Resources.getResource("jquery.min.js");
@@ -136,13 +146,13 @@ public class Start {
 			js.executeScript(jqueryText);
 			for (int i = 0; i < 3500; i++) {
 				Thread.sleep(1500);
-				js.executeScript("$('div ._ms7sh._2txtt')[0].scroll(0,1500000);");
-				pessoas = driver.findElements(By.cssSelector("._9irns._pg23k._jpwof._gvoze"));
-				if(pessoas.size() == numPessoas)
+				js.executeScript("$('div .wwxN2.GD3H5')[0].scroll(0,1500000);");
+				pessoas = driver.findElements(By.cssSelector(".UYK0S._2dbep.qNELH.kIKUG"));
+				if (pessoas.size() == numPessoas)
 					break;
 				numPessoas = pessoas.size();
 			}
-			System.out.println("Fim do processo de scroll "+new Date());
+			System.out.println("Fim do processo de scroll " + new Date());
 		} catch (Exception e) {
 			System.out.println(e);
 		}
