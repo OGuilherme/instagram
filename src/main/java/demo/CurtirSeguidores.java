@@ -15,7 +15,7 @@ import org.openqa.selenium.interactions.Actions;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 
-public class Start {
+public class CurtirSeguidores {
 	/*
 	 * O sistema esta programado para ir em 6 fotos diferentes para achar
 	 * seguidores. Caso não queira que ele va em 6, só precisa adcionar // no inicio
@@ -24,7 +24,7 @@ public class Start {
 	 * executada só é necessario remover a //
 	 */
 
-	private static String urlFoto1 = "https://www.instagram.com/p/BkIcoLmAkQv/?taken-by=neymarjr";
+	private static String urlFoto1 = "https://www.instagram.com/gus2rodas/";
 	private static String urlFoto2 = "https://www.instagram.com/p/BkERy2PHn0A/?taken-by=mariliamendoncacantora";
 	private static String urlFoto3 = "https://www.instagram.com/p/Bj965K-AEL5/?taken-by=fernandoesorocaba";
 	private static String urlFoto4 = "https://www.instagram.com/p/BhiZGkhBoY1/?taken-by=rex2501";
@@ -38,11 +38,11 @@ public class Start {
 		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		try {
-			logar(driver);
-			Thread.sleep(6000);
-			start(urlFoto1, driver);
-			start(urlFoto2, driver);
-			start(urlFoto3, driver);
+			//logar(driver);
+			//Thread.sleep(6000);
+			//start(urlFoto1, driver);
+			//start(urlFoto2, driver);
+			//start(urlFoto3, driver);
 			// start(urlFoto4, driver);
 			// start(urlFoto5, driver);
 			// start(urlFoto6, driver);
@@ -87,7 +87,7 @@ public class Start {
 		try {
 			Actions actions = new Actions(driver);
 			String originalHandle = driver.getWindowHandle();
-			driver.findElement(By.cssSelector(".zV_Nj")).click();
+			verSeguidores(driver);
 			scroll(driver);
 			List<WebElement> pessoas = driver.findElements(By.cssSelector(".UYK0S._2dbep.qNELH.kIKUG"));
 			int numPessoas = pessoas.size() - 1;
@@ -144,13 +144,24 @@ public class Start {
 			js.executeScript(jqueryText);
 			for (int i = 0; i < 3500; i++) {
 				Thread.sleep(1500);
-				js.executeScript("$('div .wwxN2.GD3H5')[0].scroll(0,1500000);");
+				js.executeScript("$('div .j6cq2')[0].scroll(0,1500000);");
 				pessoas = driver.findElements(By.cssSelector(".UYK0S._2dbep.qNELH.kIKUG"));
 				if (pessoas.size() == numPessoas)
 					break;
 				numPessoas = pessoas.size();
 			}
 			System.out.println("Fim do processo de scroll " + new Date());
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+	}
+
+	public static void verSeguidores(WebDriver driver) {
+		try {
+			System.out.println("Inicio do processo de ver seguidores " + new Date());
+			List<WebElement> menus = driver.findElements(By.cssSelector(".-nal3"));
+			menus.get(1).click();
+			System.out.println("Fim do processo de ver seguidores " + new Date());
 		} catch (Exception e) {
 			System.out.println(e);
 		}
