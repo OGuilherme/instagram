@@ -38,9 +38,9 @@ public class CurtirSeguidores {
 		System.setProperty("webdriver.chrome.driver", "D:\\chromedriver_win32\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		try {
-			//logar(driver);
-			//Thread.sleep(6000);
-			//start(urlFoto1, driver);
+			logar(driver);
+			Thread.sleep(6000);
+			start(urlFoto1, driver);
 			//start(urlFoto2, driver);
 			//start(urlFoto3, driver);
 			// start(urlFoto4, driver);
@@ -101,7 +101,7 @@ public class CurtirSeguidores {
 					pessoas.get(i).sendKeys(selectLinkOpeninNewTab);
 					Thread.sleep(1000);
 					for (String handle : driver.getWindowHandles()) {
-						if (curtidasTotais > 3000) {
+						if (curtidasTotais > 1500) {
 							break;
 						}
 						if (!handle.equals(originalHandle)) {
@@ -111,7 +111,7 @@ public class CurtirSeguidores {
 								Thread.sleep(600);
 								if (possivelCurtir(driver)) {
 									Thread.sleep(600);
-									driver.findElement(By.cssSelector(".Szr5J.coreSpriteHeartOpen")).click();
+									driver.findElement(By.cssSelector(".coreSpriteHeartOpen .Szr5J")).click();
 									curtidas++;
 									curtidasTotais++;
 								}
