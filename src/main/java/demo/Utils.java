@@ -43,7 +43,7 @@ public class Utils {
 			String originalHandle = driver.getWindowHandle();
 			driver.findElement(By.cssSelector(".zV_Nj")).click();
 			scroll(driver);
-			List<WebElement> pessoas = driver.findElements(By.cssSelector(".UYK0S._2dbep.qNELH.kIKUG"));
+			List<WebElement> pessoas = driver.findElements(By.cssSelector(".SAvC5._2dbep.qNELH.kIKUG"));
 			int numPessoas = pessoas.size() - 1;
 			perfisTotais = numPessoas;
 			for (int i = 0; i <= numPessoas; i++) {
@@ -63,7 +63,9 @@ public class Utils {
 								Thread.sleep(300);
 								if (possivelCurtir(driver)) {
 									Thread.sleep(300);
-									driver.findElement(By.cssSelector(".coreSpriteHeartOpen.oF4XW.dCJp8 .glyphsSpriteHeart__outline__24__grey_9.u-__7")).click();
+									driver.findElement(By.cssSelector(
+											".coreSpriteHeartOpen.oF4XW.dCJp8 .glyphsSpriteHeart__outline__24__grey_9.u-__7"))
+											.click();
 									curtidasTotais++;
 								}
 							}
@@ -78,8 +80,9 @@ public class Utils {
 			}
 		} catch (Exception e) {
 			mensagens.append(System.lineSeparator() + e.getMessage());
-		}finally{
-			if(!mensagens.toString().isEmpty())
+		} finally {
+			if (!mensagens.toString().isEmpty())
+				Email.enviarEmail(mensagens.toString());
 			System.out.println("curtidas: " + curtidasTotais + " e perfis: " + perfisTotais);
 		}
 	}
@@ -90,8 +93,8 @@ public class Utils {
 			Actions actions = new Actions(driver);
 			String originalHandle = driver.getWindowHandle();
 			verSeguidores(driver);
-			scroll(driver);
-			List<WebElement> pessoas = driver.findElements(By.cssSelector(".UYK0S._2dbep.qNELH.kIKUG"));
+			scrollSeguidores(driver);
+			List<WebElement> pessoas = driver.findElements(By.cssSelector(".SAvC5._2dbep.qNELH.kIKUG"));
 			int numPessoas = pessoas.size() - 1;
 			for (int i = 0; i <= numPessoas; i++) {
 				if (curtidasTotais > 1500) {
@@ -110,7 +113,9 @@ public class Utils {
 								Thread.sleep(300);
 								if (possivelCurtir(driver)) {
 									Thread.sleep(300);
-									driver.findElement(By.cssSelector(".coreSpriteHeartOpen.oF4XW.dCJp8 .glyphsSpriteHeart__outline__24__grey_9.u-__7")).click();
+									driver.findElement(By.cssSelector(
+											".coreSpriteHeartOpen.oF4XW.dCJp8 .glyphsSpriteHeart__outline__24__grey_9.u-__7"))
+											.click();
 									curtidasTotais++;
 								}
 							}
@@ -126,26 +131,46 @@ public class Utils {
 			perfisTotais += numPessoas;
 		} catch (Exception e) {
 			mensagens.append(System.lineSeparator() + e.getMessage());
-		}finally {
-			if(!mensagens.toString().isEmpty())
+		} finally {
+			if (!mensagens.toString().isEmpty())
 				Email.enviarEmail(mensagens.toString());
 			System.out.println("curtidas: " + curtidasTotais + " e perfis: " + perfisTotais);
 		}
 	}
 
-	public static void scroll(WebDriver driver) {
+	public static void scrollSeguidores(WebDriver driver) {
 		try {
-			List<WebElement> pessoas = driver.findElements(By.cssSelector(".UYK0S._2dbep.qNELH.kIKUG"));
+			List<WebElement> pessoas = driver.findElements(By.cssSelector(".rKm58._6xe7A .PZuss .wo9IH"));
 			int numPessoas = pessoas.size();
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			URL jqueryUrl = Resources.getResource("jquery.min.js");
-			System.out.println(jqueryUrl.getPath());
 			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 			js.executeScript(jqueryText);
-			for (int i = 0; i < 3500; i++) {
+			for (int i = 0; i < 1; i++) {
 				js.executeScript("$('div .j6cq2')[0].scroll(0,1500000);");
 				Thread.sleep(1500);
-				pessoas = driver.findElements(By.cssSelector(".UYK0S._2dbep.qNELH.kIKUG"));
+				pessoas = driver.findElements(By.cssSelector(".rKm58._6xe7A .PZuss .wo9IH"));
+				if (pessoas.size() == numPessoas)
+					break;
+				numPessoas = pessoas.size();
+			}
+		} catch (Exception e) {
+			mensagens.append(System.lineSeparator() + e.getMessage());
+		}
+	}
+	
+	public static void scroll(WebDriver driver) {
+		try {
+			List<WebElement> pessoas = driver.findElements(By.cssSelector(".PZuss .wo9IH"));
+			int numPessoas = pessoas.size();
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			URL jqueryUrl = Resources.getResource("jquery.min.js");
+			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
+			js.executeScript(jqueryText);
+			for (int i = 0; i < 1; i++) {
+				js.executeScript("$('.wwxN2.GD3H5')[0].scroll(0,1500000);");
+				Thread.sleep(1500);
+				pessoas = driver.findElements(By.cssSelector(".PZuss .wo9IH"));
 				if (pessoas.size() == numPessoas)
 					break;
 				numPessoas = pessoas.size();
@@ -157,6 +182,7 @@ public class Utils {
 
 	public static void verSeguidores(WebDriver driver) {
 		try {
+			Thread.sleep(1500);
 			List<WebElement> menus = driver.findElements(By.cssSelector(".-nal3"));
 			menus.get(1).click();
 		} catch (Exception e) {
