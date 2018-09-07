@@ -37,6 +37,7 @@ public class Utils {
 	}
 
 	public static void curtidores(WebDriver driver, String urlFoto) {
+		driver.get(urlFoto);
 		try {
 			Actions actions = new Actions(driver);
 			String originalHandle = driver.getWindowHandle();
@@ -62,7 +63,7 @@ public class Utils {
 								Thread.sleep(300);
 								if (possivelCurtir(driver)) {
 									Thread.sleep(300);
-									driver.findElement(By.cssSelector(".Szr5J.coreSpriteHeartOpen")).click();
+									driver.findElement(By.cssSelector(".coreSpriteHeartOpen.oF4XW.dCJp8 .glyphsSpriteHeart__outline__24__grey_9.u-__7")).click();
 									curtidasTotais++;
 								}
 							}
@@ -109,7 +110,7 @@ public class Utils {
 								Thread.sleep(300);
 								if (possivelCurtir(driver)) {
 									Thread.sleep(300);
-									driver.findElement(By.cssSelector(".coreSpriteHeartOpen .Szr5J")).click();
+									driver.findElement(By.cssSelector(".coreSpriteHeartOpen.oF4XW.dCJp8 .glyphsSpriteHeart__outline__24__grey_9.u-__7")).click();
 									curtidasTotais++;
 								}
 							}
@@ -142,8 +143,8 @@ public class Utils {
 			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 			js.executeScript(jqueryText);
 			for (int i = 0; i < 3500; i++) {
-				Thread.sleep(1500);
 				js.executeScript("$('div .j6cq2')[0].scroll(0,1500000);");
+				Thread.sleep(1500);
 				pessoas = driver.findElements(By.cssSelector(".UYK0S._2dbep.qNELH.kIKUG"));
 				if (pessoas.size() == numPessoas)
 					break;
@@ -165,7 +166,7 @@ public class Utils {
 
 	public static Boolean possivelCurtir(WebDriver driver) {
 		try {
-			driver.findElement(By.className("coreSpriteHeartFull"));
+			driver.findElement(By.className("glyphsSpriteHeart__filled__24__red_5"));
 			return false;
 		} catch (Exception e) {
 			return true;
