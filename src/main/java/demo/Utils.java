@@ -32,11 +32,12 @@ public class Utils {
 			}
 			Thread.sleep(3000);
 		} catch (Exception e) {
-			mensagens.append(System.lineSeparator() + e.getMessage());
+			System.out.println(e);
+			//mensagens.append(System.lineSeparator() + e.getMessage());
 		}
 	}
 
-	public static void curtidores(WebDriver driver, String urlFoto) {
+	public static Integer curtidores(WebDriver driver, String urlFoto) {
 		driver.get(urlFoto);
 		try {
 			Actions actions = new Actions(driver);
@@ -72,22 +73,26 @@ public class Utils {
 						}
 					}
 				} catch (Exception e) {
-					mensagens.append(System.lineSeparator() + e.getMessage());
+					System.out.println(e);
+					//mensagens.append(System.lineSeparator() + e.getMessage());
 				} finally {
 					driver.close();
 					driver.switchTo().window(originalHandle);
 				}
 			}
 		} catch (Exception e) {
-			mensagens.append(System.lineSeparator() + e.getMessage());
+			System.out.println(e);
+			//mensagens.append(System.lineSeparator() + e.getMessage());
 		} finally {
 			if (!mensagens.toString().isEmpty())
-				Email.enviarEmail(mensagens.toString());
+				System.out.println();
+				//Email.enviarEmail(mensagens.toString());
 			System.out.println("curtidas: " + curtidasTotais + " e perfis: " + perfisTotais);
 		}
+		return curtidasTotais;
 	}
 
-	public static void curtidores(String urlFoto, WebDriver driver) {
+	public static Integer curtidores(String urlFoto, WebDriver driver) {
 		driver.get(urlFoto);
 		try {
 			Actions actions = new Actions(driver);
@@ -122,7 +127,8 @@ public class Utils {
 						}
 					}
 				} catch (Exception e) {
-					mensagens.append(System.lineSeparator() + e.getMessage());
+					System.out.println(e);
+					//mensagens.append(System.lineSeparator() + e.getMessage());
 				} finally {
 					driver.close();
 					driver.switchTo().window(originalHandle);
@@ -130,12 +136,14 @@ public class Utils {
 			}
 			perfisTotais += numPessoas;
 		} catch (Exception e) {
-			mensagens.append(System.lineSeparator() + e.getMessage());
+			System.out.println(e);
+			//mensagens.append(System.lineSeparator() + e.getMessage());
 		} finally {
-			if (!mensagens.toString().isEmpty())
-				Email.enviarEmail(mensagens.toString());
+			//if (!mensagens.toString().isEmpty())
+				//Email.enviarEmail(mensagens.toString());
 			System.out.println("curtidas: " + curtidasTotais + " e perfis: " + perfisTotais);
 		}
+		return curtidasTotais;
 	}
 
 	public static void scrollSeguidores(WebDriver driver) {
@@ -146,7 +154,7 @@ public class Utils {
 			URL jqueryUrl = Resources.getResource("jquery.min.js");
 			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 			js.executeScript(jqueryText);
-			for (int i = 0; i < 1; i++) {
+			for (int i = 0; i < 3500; i++) {
 				js.executeScript("$('div .j6cq2')[0].scroll(0,1500000);");
 				Thread.sleep(1500);
 				pessoas = driver.findElements(By.cssSelector(".rKm58._6xe7A .PZuss .wo9IH"));
@@ -155,7 +163,8 @@ public class Utils {
 				numPessoas = pessoas.size();
 			}
 		} catch (Exception e) {
-			mensagens.append(System.lineSeparator() + e.getMessage());
+			System.out.println(e);
+			//mensagens.append(System.lineSeparator() + e.getMessage());
 		}
 	}
 	
@@ -167,7 +176,7 @@ public class Utils {
 			URL jqueryUrl = Resources.getResource("jquery.min.js");
 			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 			js.executeScript(jqueryText);
-			for (int i = 0; i < 1; i++) {
+			for (int i = 0; i < 3500; i++) {
 				js.executeScript("$('.wwxN2.GD3H5')[0].scroll(0,1500000);");
 				Thread.sleep(1500);
 				pessoas = driver.findElements(By.cssSelector(".PZuss .wo9IH"));
@@ -176,7 +185,8 @@ public class Utils {
 				numPessoas = pessoas.size();
 			}
 		} catch (Exception e) {
-			mensagens.append(System.lineSeparator() + e.getMessage());
+			System.out.println(e);
+			//mensagens.append(System.lineSeparator() + e.getMessage());			
 		}
 	}
 

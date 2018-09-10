@@ -18,21 +18,25 @@ public class Start {
 	private static String urlFoto4 = "https://www.instagram.com/p/BhiZGkhBoY1/?taken-by=rex2501";
 	private static String urlFoto5 = "https://www.instagram.com/p/BiHV4ZTHwRM/?taken-by=brunogarciayt";
 	private static String urlFoto6 = "https://www.instagram.com/p/BiX1SpAAclm/?taken-by=donas";
+	private static Integer total = 0;
 
 	public static void main(String[] args) throws InterruptedException {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Guh\\Downloads\\Guilerme\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
+		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		try {
 			Utils.logar(driver);
-			Utils.curtidores(driver, urlFoto1);
-			Utils.curtidores(driver, urlFoto2);
-			Utils.curtidores(driver, urlFoto3);
-			Utils.curtidores(driver, urlFoto4);
-			Utils.curtidores(driver, urlFoto5);
-			Utils.curtidores(driver, urlFoto6);
+			total += Utils.curtidores(driver, urlFoto1);
+			total += Utils.curtidores(driver, urlFoto2);
+			total += Utils.curtidores(driver, urlFoto3);
+			total += Utils.curtidores(driver, urlFoto4);
+			total += Utils.curtidores(driver, urlFoto5);
+			total += Utils.curtidores(driver, urlFoto6);
 		} catch (Exception e) {
-			Email.enviarEmail(e+"");
+			System.out.println(e);
+			// Email.enviarEmail(e+"");
 		} finally {
+			System.out.println("Foram curtidas " + total + " fotos");
 			driver.quit();
 		}
 	}
