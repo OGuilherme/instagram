@@ -37,7 +37,8 @@ public class Utils {
 		}
 	}
 
-	public static Integer curtidores(WebDriver driver, String urlFoto) {
+	public static Integer curtidores(WebDriver driver, String urlFoto, int totalCurtidas) {
+		curtidasTotais = totalCurtidas;
 		driver.get(urlFoto);
 		try {
 			Actions actions = new Actions(driver);
@@ -92,7 +93,8 @@ public class Utils {
 		return curtidasTotais;
 	}
 
-	public static Integer curtidores(String urlFoto, WebDriver driver) {
+	public static Integer curtidores(String urlFoto, WebDriver driver, int totalCurtidas) {
+		curtidasTotais = totalCurtidas;
 		driver.get(urlFoto);
 		try {
 			Actions actions = new Actions(driver);
