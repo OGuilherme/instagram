@@ -23,7 +23,7 @@ public class CurtirSeguidores {
 	public static void main(String[] args) throws InterruptedException {
 		WebDriver driver = null;
 		try {
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Guh\\Downloads\\Guilerme\\chromedriver.exe");
 			//System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
 			driver = new ChromeDriver();
 			Utils.logar(driver);
