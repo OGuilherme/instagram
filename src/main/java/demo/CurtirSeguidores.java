@@ -21,10 +21,10 @@ public class CurtirSeguidores {
 	private static Integer total = 0;
 
 	public static void main(String[] args) throws InterruptedException {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
-		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
 		WebDriver driver = null;
 		try {
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Guh\\Downloads\\Guilerme\\chromedriver.exe");
+			//System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
 			driver = new ChromeDriver();
 			Utils.logar(driver);
 			if (total <= 1500)
