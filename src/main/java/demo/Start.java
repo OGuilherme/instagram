@@ -12,12 +12,12 @@ public class Start {
 	 * executada só é necessario remover a //
 	 */
 
-	private static String urlFoto1 = "https://www.instagram.com/p/BkIcoLmAkQv/?taken-by=neymarjr";
-	private static String urlFoto2 = "https://www.instagram.com/p/BkERy2PHn0A/?taken-by=mariliamendoncacantora";
-	private static String urlFoto3 = "https://www.instagram.com/p/Bj965K-AEL5/?taken-by=fernandoesorocaba";
-	private static String urlFoto4 = "https://www.instagram.com/p/BhiZGkhBoY1/?taken-by=rex2501";
-	private static String urlFoto5 = "https://www.instagram.com/p/BiHV4ZTHwRM/?taken-by=brunogarciayt";
-	private static String urlFoto6 = "https://www.instagram.com/p/BiX1SpAAclm/?taken-by=donas";
+	private static String urlFoto1 = "https://www.instagram.com/p/Bn7Uuq3nXys/?taken-by=wesley_alemao_";
+	private static String urlFoto2 = "https://www.instagram.com/p/Bn2cbUyH-0l/?taken-by=renatogarciayt";
+	private static String urlFoto3 = "https://www.instagram.com/p/Bn-Kfiqna1U/?taken-by=lucasmotovlog.oficial";
+	private static String urlFoto4 = "https://www.instagram.com/p/BnekEinhYlV/?taken-by=thaysonvrog.oficial";
+	private static String urlFoto5 = "https://www.instagram.com/p/BmY1TcxHX11/?taken-by=chavao13";
+	private static String urlFoto6 = "https://www.instagram.com/p/Bnyr50QlyVD/?taken-by=gus2rodas";
 	private static Integer total = 0;
 
 	public static void main(String[] args) throws InterruptedException {

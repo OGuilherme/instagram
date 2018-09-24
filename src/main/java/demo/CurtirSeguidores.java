@@ -12,12 +12,12 @@ public class CurtirSeguidores {
 	 * executada só é necessario remover a //
 	 */
 
-	private static String urlFoto1 = "https://www.instagram.com/gus2rodas/";
-	private static String urlFoto2 = "https://www.instagram.com/p/BkERy2PHn0A/?taken-by=mariliamendoncacantora";
-	private static String urlFoto3 = "https://www.instagram.com/p/Bj965K-AEL5/?taken-by=fernandoesorocaba";
-	private static String urlFoto4 = "https://www.instagram.com/p/BhiZGkhBoY1/?taken-by=rex2501";
-	private static String urlFoto5 = "https://www.instagram.com/p/BiHV4ZTHwRM/?taken-by=brunogarciayt";
-	private static String urlFoto6 = "https://www.instagram.com/p/BiX1SpAAclm/?taken-by=donas";
+	private static String urlFoto1 = "https://www.instagram.com/brno13/";
+	private static String urlFoto2 = "https://www.instagram.com/aln1001/";
+	private static String urlFoto3 = "https://www.instagram.com/dgdigoo/";
+	private static String urlFoto4 = "https://www.instagram.com/rex2501/";
+	private static String urlFoto5 = "https://www.instagram.com/arnondograu_/";
+	private static String urlFoto6 = "https://www.instagram.com/mcrick/";
 	private static Integer total = 0;
 
 	public static void main(String[] args) throws InterruptedException {
