@@ -26,12 +26,17 @@ public class Start {
 		WebDriver driver = new ChromeDriver();
 		try {
 			Utils.logar(driver);
-			total += Utils.curtidores(driver, urlFoto1);
-			total += Utils.curtidores(driver, urlFoto2);
-			total += Utils.curtidores(driver, urlFoto3);
-			total += Utils.curtidores(driver, urlFoto4);
-			total += Utils.curtidores(driver, urlFoto5);
-			total += Utils.curtidores(driver, urlFoto6);
+			total += Utils.curtidores(driver, urlFoto1, total);
+			if (total <= 1500)
+				total += Utils.curtidores(driver, urlFoto2, total);
+//			if (total <= 1500)
+//				total += Utils.curtidores(driver, urlFoto3, total);
+//			if (total <= 1500)
+//				total += Utils.curtidores(driver, urlFoto4, total);
+//			if (total <= 1500)
+//				total += Utils.curtidores(driver, urlFoto5, total);
+//			if (total <= 1500)
+//				total += Utils.curtidores(driver, urlFoto6, total);
 		} catch (Exception e) {
 			System.out.println(e);
 			// Email.enviarEmail(e+"");
