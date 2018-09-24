@@ -12,8 +12,8 @@ public class Start {
 	 * executada só é necessario remover a //
 	 */
 
-	private static String urlFoto1 = "https://www.instagram.com/p/BkIcoLmAkQv/?taken-by=neymarjr";
-	private static String urlFoto2 = "https://www.instagram.com/p/BkERy2PHn0A/?taken-by=mariliamendoncacantora";
+	private static String urlFoto1 = "https://www.instagram.com/p/BnqnTJQH0UD/?hl=pt-br&taken-by=mariliamendoncacantora";
+	private static String urlFoto2 = "https://www.instagram.com/p/BnsQ2TSnZwN/?hl=pt-br&taken-by=gusttavolima";
 	private static String urlFoto3 = "https://www.instagram.com/p/Bj965K-AEL5/?taken-by=fernandoesorocaba";
 	private static String urlFoto4 = "https://www.instagram.com/p/BhiZGkhBoY1/?taken-by=rex2501";
 	private static String urlFoto5 = "https://www.instagram.com/p/BiHV4ZTHwRM/?taken-by=brunogarciayt";
@@ -29,14 +29,14 @@ public class Start {
 			total += Utils.curtidores(driver, urlFoto1, total);
 			if (total <= 1500)
 				total += Utils.curtidores(driver, urlFoto2, total);
-			if (total <= 1500)
-				total += Utils.curtidores(driver, urlFoto3, total);
-			if (total <= 1500)
-				total += Utils.curtidores(driver, urlFoto4, total);
-			if (total <= 1500)
-				total += Utils.curtidores(driver, urlFoto5, total);
-			if (total <= 1500)
-				total += Utils.curtidores(driver, urlFoto6, total);
+//			if (total <= 1500)
+//				total += Utils.curtidores(driver, urlFoto3, total);
+//			if (total <= 1500)
+//				total += Utils.curtidores(driver, urlFoto4, total);
+//			if (total <= 1500)
+//				total += Utils.curtidores(driver, urlFoto5, total);
+//			if (total <= 1500)
+//				total += Utils.curtidores(driver, urlFoto6, total);
 		} catch (Exception e) {
 			System.out.println(e);
 			// Email.enviarEmail(e+"");
