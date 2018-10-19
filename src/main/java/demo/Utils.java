@@ -45,7 +45,7 @@ public class Utils {
 			String originalHandle = driver.getWindowHandle();
 			driver.findElement(By.cssSelector(".zV_Nj")).click();
 			scroll(driver);
-			List<WebElement> pessoas = driver.findElements(By.cssSelector("._2dbep.qNELH.kIKUG"));
+			List<WebElement> pessoas = driver.findElements(By.cssSelector(".FPmhX.notranslate._0imsa"));
 			int numPessoas = pessoas.size() - 1;
 			perfisTotais = numPessoas;
 			for (int i = 0; i <= numPessoas; i++) {
@@ -53,7 +53,7 @@ public class Utils {
 					throw new Exception();
 				}
 				try {
-					actions.moveToElement(pessoas.get(i));
+					actions.moveToElement(pessoas.get(i)).perform();
 					String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
 					pessoas.get(i).sendKeys(selectLinkOpeninNewTab);
 					Thread.sleep(1000);
@@ -101,14 +101,14 @@ public class Utils {
 			String originalHandle = driver.getWindowHandle();
 			verSeguidores(driver);
 			scrollSeguidores(driver);
-			List<WebElement> pessoas = driver.findElements(By.cssSelector("._2dbep.qNELH.kIKUG"));
+			List<WebElement> pessoas = driver.findElements(By.cssSelector(".FPmhX.notranslate._0imsa"));
 			int numPessoas = pessoas.size() - 1;
 			for (int i = 0; i <= numPessoas; i++) {
 				if (curtidasTotais > 1500) {
 					throw new Exception();
 				}
 				try {
-					actions.moveToElement(pessoas.get(i));
+					actions.moveToElement(pessoas.get(i)).perform();
 					String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
 					pessoas.get(i).sendKeys(selectLinkOpeninNewTab);
 					Thread.sleep(1000);
@@ -156,7 +156,7 @@ public class Utils {
 			URL jqueryUrl = Resources.getResource("jquery.min.js");
 			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 			js.executeScript(jqueryText);
-			for (int i = 0; i < 1; i++) {
+			for (int i = 0; i < 3500; i++) {
 				js.executeScript("$('div .j6cq2')[0].scroll(0,1500000);");
 				Thread.sleep(1500);
 				pessoas = driver.findElements(By.cssSelector(".rKm58._6xe7A .PZuss .wo9IH"));
@@ -172,12 +172,13 @@ public class Utils {
 	
 	public static void scroll(WebDriver driver) {
 		try {
-			List<WebElement> pessoas = driver.findElements(By.cssSelector("._2dbep.qNELH.kIKUG"));
-			int numPessoas = pessoas.size();
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			URL jqueryUrl = Resources.getResource("jquery.min.js");
 			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 			js.executeScript(jqueryText);
+			List<WebElement> pessoas = driver.findElements(By.cssSelector("._2dbep.qNELH.kIKUG"));
+			int numPessoas = pessoas.size();
+			Thread.sleep(1500);
 			for (int i = 0; i < 1; i++) {
 				js.executeScript("$('.wwxN2.GD3H5')[0].scroll(0,1500000);");
 				Thread.sleep(1500);
