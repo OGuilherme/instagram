@@ -179,7 +179,7 @@ public class Utils {
 			List<WebElement> pessoas = driver.findElements(By.cssSelector("._2dbep.qNELH.kIKUG"));
 			int numPessoas = pessoas.size();
 			Thread.sleep(1500);
-			for (int i = 0; i < 1; i++) {
+			for (int i = 0; i < 3500; i++) {
 				js.executeScript("$('.wwxN2.GD3H5')[0].scroll(0,1500000);");
 				Thread.sleep(1500);
 				pessoas = driver.findElements(By.cssSelector("._2dbep.qNELH.kIKUG"));
