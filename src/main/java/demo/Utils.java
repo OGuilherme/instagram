@@ -66,7 +66,7 @@ public class Utils {
 								if (possivelCurtir(driver)) {
 									Thread.sleep(300);
 									driver.findElement(By.cssSelector(
-											".coreSpriteHeartOpen.oF4XW.dCJp8 .glyphsSpriteHeart__outline__24__grey_9.u-__7"))
+											".coreSpriteHeartOpen._0mzm-.dCJp8 .glyphsSpriteHeart__outline__24__grey_9.u-__7"))
 											.click();
 									curtidasTotais++;
 								}
@@ -74,11 +74,12 @@ public class Utils {
 						}
 					}
 				} catch (Exception e) {
-					System.out.println(e);
+					System.out.println("erro ao curtir");
 					//mensagens.append(System.lineSeparator() + e.getMessage());
 				} finally {
 					driver.close();
 					driver.switchTo().window(originalHandle);
+					System.out.println(curtidasTotais+", quantidade perfis:"+perfisTotais);
 				}
 			}
 		} catch (Exception e) {
@@ -121,7 +122,7 @@ public class Utils {
 								if (possivelCurtir(driver)) {
 									Thread.sleep(300);
 									driver.findElement(By.cssSelector(
-											".coreSpriteHeartOpen.oF4XW.dCJp8 .glyphsSpriteHeart__outline__24__grey_9.u-__7"))
+											".coreSpriteHeartOpen._0mzm-.dCJp8 .glyphsSpriteHeart__outline__24__grey_9.u-__7"))
 											.click();
 									curtidasTotais++;
 								}
@@ -129,11 +130,12 @@ public class Utils {
 						}
 					}
 				} catch (Exception e) {
-					System.out.println(e);
+					System.out.println("erro ao curtir");
 					//mensagens.append(System.lineSeparator() + e.getMessage());
 				} finally {
 					driver.close();
 					driver.switchTo().window(originalHandle);
+					System.out.println(curtidasTotais+", quantidade perfis:"+perfisTotais);
 				}
 			}
 			perfisTotais += numPessoas;
@@ -178,6 +180,7 @@ public class Utils {
 			js.executeScript(jqueryText);
 			List<WebElement> pessoas = driver.findElements(By.cssSelector("._2dbep.qNELH.kIKUG"));
 			int numPessoas = pessoas.size();
+			Thread.sleep(1500);
 			for (int i = 0; i < 3500; i++) {
 				js.executeScript("$('.wwxN2.GD3H5')[0].scroll(0,1500000);");
 				Thread.sleep(1500);

@@ -21,22 +21,22 @@ public class Start {
 	private static Integer total = 0;
 
 	public static void main(String[] args) throws InterruptedException {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Guh\\Downloads\\Guilerme\\chromedriver.exe");
-		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
+		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\Guh\\Downloads\\Guilerme\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		try {
 			Utils.logar(driver);
-			total += Utils.curtidores(driver, urlFoto1, total);
+			total = Utils.curtidores(driver, urlFoto1, total);
 			if (total <= 1500)
-				total += Utils.curtidores(driver, urlFoto2, total);
+				total = Utils.curtidores(driver, urlFoto2, total);
 			if (total <= 1500)
-				total += Utils.curtidores(driver, urlFoto3, total);
-			if (total <= 1500)
-				total += Utils.curtidores(driver, urlFoto4, total);
-			if (total <= 1500)
-				total += Utils.curtidores(driver, urlFoto5, total);
-			if (total <= 1500)
-				total += Utils.curtidores(driver, urlFoto6, total);
+				total = Utils.curtidores(driver, urlFoto3, total);
+//			if (total <= 1500)
+//				total = Utils.curtidores(driver, urlFoto4, total);
+//			if (total <= 1500)
+//				total = Utils.curtidores(driver, urlFoto5, total);
+//			if (total <= 1500)
+//				total = Utils.curtidores(driver, urlFoto6, total);
 		} catch (Exception e) {
 			System.out.println(e);
 			// Email.enviarEmail(e+"");

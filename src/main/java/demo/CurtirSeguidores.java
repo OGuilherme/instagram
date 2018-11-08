@@ -23,22 +23,22 @@ public class CurtirSeguidores {
 	public static void main(String[] args) throws InterruptedException {
 		WebDriver driver = null;
 		try {
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\Guh\\Downloads\\Guilerme\\chromedriver.exe");
-			//System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
+			//System.setProperty("webdriver.chrome.driver", "C:\\Users\\Guh\\Downloads\\Guilerme\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
 			driver = new ChromeDriver();
 			Utils.logar(driver);
 			if (total <= 1500)
-				total += Utils.curtidores(urlFoto1, driver, 0);
+				total = Utils.curtidores(urlFoto1, driver, 0);
 			if (total <= 1500)
-				total += Utils.curtidores(urlFoto2, driver, total);
+				total = Utils.curtidores(urlFoto2, driver, total);
 			if (total <= 1500)
-				total += Utils.curtidores(urlFoto3, driver, total);
+				total = Utils.curtidores(urlFoto3, driver, total);
 			if (total <= 1500)
-				total += Utils.curtidores(urlFoto4, driver, total);
+				total = Utils.curtidores(urlFoto4, driver, total);
 			if (total <= 1500)
-				total += Utils.curtidores(urlFoto5, driver, total);
+				total = Utils.curtidores(urlFoto5, driver, total);
 			if (total <= 1500)
-				total += Utils.curtidores(urlFoto6, driver, total);
+				total = Utils.curtidores(urlFoto6, driver, total);
 		} catch (Exception e) {
 			System.out.println(e);
 			// Email.enviarEmail(e+"");
