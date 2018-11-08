@@ -12,12 +12,12 @@ public class Start {
 	 * executada só é necessario remover a //
 	 */
 
-	private static String urlFoto1 = "https://www.instagram.com/p/Bn7Uuq3nXys/?taken-by=wesley_alemao_";
-	private static String urlFoto2 = "https://www.instagram.com/p/Bn2cbUyH-0l/?taken-by=renatogarciayt";
-	private static String urlFoto3 = "https://www.instagram.com/p/Bn-Kfiqna1U/?taken-by=lucasmotovlog.oficial";
-	private static String urlFoto4 = "https://www.instagram.com/p/BnekEinhYlV/?taken-by=thaysonvrog.oficial";
-	private static String urlFoto5 = "https://www.instagram.com/p/BmY1TcxHX11/?taken-by=chavao13";
-	private static String urlFoto6 = "https://www.instagram.com/p/Bnyr50QlyVD/?taken-by=gus2rodas";
+	private static String urlFoto1 = "https://www.instagram.com/p/Bp0NFJng872/";
+	private static String urlFoto2 = "https://www.instagram.com/p/Bp0KUrIB6ka/";
+	private static String urlFoto3 = "https://www.instagram.com/p/BpxqideBTvM/";
+	private static String urlFoto4 = "https://www.instagram.com/p/Bpb-YOTBTDx/?taken-by=edergrauu";
+	private static String urlFoto5 = "https://www.instagram.com/p/BoUV3nHlVQu/?taken-by=vinicius_said";
+	private static String urlFoto6 = "https://www.instagram.com/p/BoJrjl-nBFZ/?taken-by=lucasmotovlog.oficial";
 	private static Integer total = 0;
 
 	public static void main(String[] args) throws InterruptedException {
@@ -29,14 +29,14 @@ public class Start {
 			total += Utils.curtidores(driver, urlFoto1, total);
 			if (total <= 1500)
 				total += Utils.curtidores(driver, urlFoto2, total);
-//			if (total <= 1500)
-//				total += Utils.curtidores(driver, urlFoto3, total);
-//			if (total <= 1500)
-//				total += Utils.curtidores(driver, urlFoto4, total);
-//			if (total <= 1500)
-//				total += Utils.curtidores(driver, urlFoto5, total);
-//			if (total <= 1500)
-//				total += Utils.curtidores(driver, urlFoto6, total);
+			if (total <= 1500)
+				total += Utils.curtidores(driver, urlFoto3, total);
+			if (total <= 1500)
+				total += Utils.curtidores(driver, urlFoto4, total);
+			if (total <= 1500)
+				total += Utils.curtidores(driver, urlFoto5, total);
+			if (total <= 1500)
+				total += Utils.curtidores(driver, urlFoto6, total);
 		} catch (Exception e) {
 			System.out.println(e);
 			// Email.enviarEmail(e+"");
