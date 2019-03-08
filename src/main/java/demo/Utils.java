@@ -43,9 +43,13 @@ public class Utils {
 		try {
 			Actions actions = new Actions(driver);
 			String originalHandle = driver.getWindowHandle();
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			URL jqueryUrl = Resources.getResource("jquery.min.js");
+			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
+			js.executeScript(jqueryText);
 			driver.findElement(By.cssSelector(".zV_Nj")).click();
 			scroll(driver);
-			List<WebElement> pessoas = driver.findElements(By.cssSelector(".FPmhX.notranslate._0imsa"));
+			List<WebElement> pessoas = driver.findElements(By.cssSelector("._2dbep.qNELH.kIKUG"));
 			int numPessoas = pessoas.size() - 1;
 			perfisTotais = numPessoas;
 			for (int i = 0; i <= numPessoas; i++) {
@@ -53,7 +57,10 @@ public class Utils {
 					throw new Exception();
 				}
 				try {
-					actions.moveToElement(pessoas.get(i)).perform();
+					js.executeScript("$('.Igw0E.rBNOH.eGOV_.ybXk5._4EzTm.XfCBB.HVWg4._0mzm-.ZUqME')["+i+"].scrollIntoView();");
+					Thread.sleep(1000);
+					js.executeScript("$('.Igw0E.rBNOH.eGOV_.ybXk5._4EzTm.XfCBB.HVWg4._0mzm-.ZUqME')["+i+"].scrollIntoView();");
+					//actions.moveToElement(pessoas.get(i)).perform();
 					String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
 					pessoas.get(i).sendKeys(selectLinkOpeninNewTab);
 					Thread.sleep(1000);
@@ -109,7 +116,7 @@ public class Utils {
 					throw new Exception();
 				}
 				try {
-					actions.moveToElement(pessoas.get(i)).perform();
+					actions.moveToElement(pessoas.get(i+1)).perform();
 					String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
 					pessoas.get(i).sendKeys(selectLinkOpeninNewTab);
 					Thread.sleep(1000);
@@ -177,14 +184,16 @@ public class Utils {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			URL jqueryUrl = Resources.getResource("jquery.min.js");
 			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
+			Actions actions = new Actions(driver);
 			js.executeScript(jqueryText);
-			List<WebElement> pessoas = driver.findElements(By.cssSelector("._2dbep.qNELH.kIKUG"));
-			int numPessoas = pessoas.size();
 			Thread.sleep(1500);
+			List<WebElement> pessoas = driver.findElements(By.cssSelector(".Igw0E.rBNOH.eGOV_.ybXk5._4EzTm.XfCBB.HVWg4._0mzm-.ZUqME"));
+			int numPessoas = pessoas.size();
 			for (int i = 0; i < 3500; i++) {
-				js.executeScript("$('.wwxN2.GD3H5')[0].scroll(0,1500000);");
-				Thread.sleep(1500);
-				pessoas = driver.findElements(By.cssSelector("._2dbep.qNELH.kIKUG"));
+				actions.moveToElement(pessoas.get(numPessoas-1)).perform();
+				//js.executeScript("$('.Igw0E.rBNOH.eGOV_.ybXk5._4EzTm.XfCBB.HVWg4._0mzm-.ZUqME')[0].scroll(0,1500000);");
+				Thread.sleep(2000);
+				pessoas = driver.findElements(By.cssSelector(".Igw0E.rBNOH.eGOV_.ybXk5._4EzTm.XfCBB.HVWg4._0mzm-.ZUqME"));
 				if (pessoas.size() == numPessoas)
 					break;
 				numPessoas = pessoas.size();
