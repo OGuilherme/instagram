@@ -73,7 +73,7 @@ public class Utils {
 								if (possivelCurtir(driver)) {
 									Thread.sleep(300);
 									driver.findElement(By.cssSelector(
-											".coreSpriteHeartOpen._0mzm-.dCJp8 .glyphsSpriteHeart__outline__24__grey_9.u-__7"))
+											".dCJp8.afkep._0mzm- .glyphsSpriteHeart__outline__24__grey_9.u-__7"))
 											.click();
 									curtidasTotais++;
 								}
@@ -189,7 +189,7 @@ public class Utils {
 			Thread.sleep(1500);
 			List<WebElement> pessoas = driver.findElements(By.cssSelector(".Igw0E.rBNOH.eGOV_.ybXk5._4EzTm.XfCBB.HVWg4._0mzm-.ZUqME"));
 			int numPessoas = pessoas.size();
-			for (int i = 0; i < 3500; i++) {
+			for (int i = 0; i < 3; i++) {
 				actions.moveToElement(pessoas.get(numPessoas-1)).perform();
 				//js.executeScript("$('.Igw0E.rBNOH.eGOV_.ybXk5._4EzTm.XfCBB.HVWg4._0mzm-.ZUqME')[0].scroll(0,1500000);");
 				Thread.sleep(2000);
