@@ -1,7 +1,10 @@
 package demo;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -19,6 +22,8 @@ public class Utils {
 	private static int curtidasTotais = 0;
 	private static int perfisTotais = 0;
 	private static StringBuilder mensagens = new StringBuilder();
+	private static List<WebElement> pessoas = new ArrayList<WebElement>();
+	private static Set<WebElement> pessoasRepetidas = new HashSet<WebElement>();
 
 	public static void logar(WebDriver driver) {
 		Boolean isValid = false;
@@ -33,7 +38,7 @@ public class Utils {
 			Thread.sleep(3000);
 		} catch (Exception e) {
 			System.out.println(e);
-			//mensagens.append(System.lineSeparator() + e.getMessage());
+			// mensagens.append(System.lineSeparator() + e.getMessage());
 		}
 	}
 
@@ -48,54 +53,54 @@ public class Utils {
 			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 			js.executeScript(jqueryText);
 			driver.findElement(By.cssSelector(".zV_Nj")).click();
-			scroll(driver);
-			List<WebElement> pessoas = driver.findElements(By.cssSelector("._2dbep.qNELH.kIKUG"));
-			int numPessoas = pessoas.size() - 1;
-			perfisTotais = numPessoas;
-			for (int i = 0; i <= numPessoas; i++) {
-				if (curtidasTotais > 1500) {
-					throw new Exception();
-				}
-				try {
-					js.executeScript("$('.Igw0E.rBNOH.eGOV_.ybXk5._4EzTm.XfCBB.HVWg4._0mzm-.ZUqME')["+i+"].scrollIntoView();");
-					Thread.sleep(1000);
-					js.executeScript("$('.Igw0E.rBNOH.eGOV_.ybXk5._4EzTm.XfCBB.HVWg4._0mzm-.ZUqME')["+i+"].scrollIntoView();");
-					//actions.moveToElement(pessoas.get(i)).perform();
-					String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
-					pessoas.get(i).sendKeys(selectLinkOpeninNewTab);
-					Thread.sleep(1000);
-					for (String handle : driver.getWindowHandles()) {
-						if (!handle.equals(originalHandle)) {
-							driver.switchTo().window(handle);
-							if (!perfilPublico(driver)) {
-								driver.findElement(By.cssSelector(".v1Nh3.kIKUG._bz0w a")).click();
-								Thread.sleep(300);
-								if (possivelCurtir(driver)) {
-									Thread.sleep(300);
-									driver.findElement(By.cssSelector(
-											".dCJp8.afkep._0mzm- .glyphsSpriteHeart__outline__24__grey_9.u-__7"))
-											.click();
-									curtidasTotais++;
+			for (int i = 0; i <= 300; i++) {
+				pessoas = scroll(driver);
+				perfisTotais += pessoas.size();
+				for (int j = 0; j < pessoas.size(); j++) {
+					if (curtidasTotais <= 1500) {
+						try {
+							actions.moveToElement(pessoas.get(j)).perform();
+							String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
+							pessoas.get(j).sendKeys(selectLinkOpeninNewTab);
+							Thread.sleep(1000);
+							for (String handle : driver.getWindowHandles()) {
+								if (!handle.equals(originalHandle)) {
+									driver.switchTo().window(handle);
+									if (!perfilPublico(driver)) {
+										driver.findElement(By.cssSelector(".v1Nh3.kIKUG._bz0w a")).click();
+										Thread.sleep(300);
+										if (possivelCurtir(driver)) {
+											Thread.sleep(500);
+											driver.findElement(By.cssSelector(
+													".dCJp8.afkep._0mzm- .glyphsSpriteHeart__outline__24__grey_9.u-__7"))
+													.click();
+											curtidasTotais++;
+										}
+									}
 								}
 							}
+						} catch (Exception e) {
+							System.out.println("erro ao curtir");
+							// mensagens.append(System.lineSeparator() + e.getMessage());
+						} finally {
+							if (!originalHandle.equalsIgnoreCase(driver.getWindowHandle()))
+								driver.close();
+							driver.switchTo().window(originalHandle);
+							System.out.println(curtidasTotais + ", passou por: " + i + "perfis, quantidade perfis:"
+									+ perfisTotais);
 						}
+					} else {
+						throw new Exception();
 					}
-				} catch (Exception e) {
-					System.out.println("erro ao curtir");
-					//mensagens.append(System.lineSeparator() + e.getMessage());
-				} finally {
-					driver.close();
-					driver.switchTo().window(originalHandle);
-					System.out.println(curtidasTotais+", quantidade perfis:"+perfisTotais);
 				}
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-			//mensagens.append(System.lineSeparator() + e.getMessage());
+			// mensagens.append(System.lineSeparator() + e.getMessage());
 		} finally {
 			if (!mensagens.toString().isEmpty())
 				System.out.println();
-				//Email.enviarEmail(mensagens.toString());
+			// Email.enviarEmail(mensagens.toString());
 			System.out.println("curtidas: " + curtidasTotais + " e perfis: " + perfisTotais);
 		}
 		return curtidasTotais;
@@ -116,7 +121,7 @@ public class Utils {
 					throw new Exception();
 				}
 				try {
-					actions.moveToElement(pessoas.get(i+1)).perform();
+					actions.moveToElement(pessoas.get(i + 1)).perform();
 					String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
 					pessoas.get(i).sendKeys(selectLinkOpeninNewTab);
 					Thread.sleep(1000);
@@ -138,20 +143,20 @@ public class Utils {
 					}
 				} catch (Exception e) {
 					System.out.println("erro ao curtir");
-					//mensagens.append(System.lineSeparator() + e.getMessage());
+					// mensagens.append(System.lineSeparator() + e.getMessage());
 				} finally {
 					driver.close();
 					driver.switchTo().window(originalHandle);
-					System.out.println(curtidasTotais+", quantidade perfis:"+perfisTotais);
+					System.out.println(curtidasTotais + ", quantidade perfis:" + perfisTotais);
 				}
 			}
 			perfisTotais += numPessoas;
 		} catch (Exception e) {
 			System.out.println(e);
-			//mensagens.append(System.lineSeparator() + e.getMessage());
+			// mensagens.append(System.lineSeparator() + e.getMessage());
 		} finally {
-			//if (!mensagens.toString().isEmpty())
-				//Email.enviarEmail(mensagens.toString());
+			// if (!mensagens.toString().isEmpty())
+			// Email.enviarEmail(mensagens.toString());
 			System.out.println("curtidas: " + curtidasTotais + " e perfis: " + perfisTotais);
 		}
 		return curtidasTotais;
@@ -175,33 +180,38 @@ public class Utils {
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-			//mensagens.append(System.lineSeparator() + e.getMessage());
+			// mensagens.append(System.lineSeparator() + e.getMessage());
 		}
 	}
-	
-	public static void scroll(WebDriver driver) {
+
+	public static List<WebElement> scroll(WebDriver driver) {
+		List<WebElement> pessoasScroll = null;
 		try {
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			URL jqueryUrl = Resources.getResource("jquery.min.js");
 			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
-			Actions actions = new Actions(driver);
 			js.executeScript(jqueryText);
 			Thread.sleep(1500);
-			List<WebElement> pessoas = driver.findElements(By.cssSelector(".Igw0E.rBNOH.eGOV_.ybXk5._4EzTm.XfCBB.HVWg4._0mzm-.ZUqME"));
-			int numPessoas = pessoas.size();
-			for (int i = 0; i < 3500; i++) {
-				actions.moveToElement(pessoas.get(numPessoas-1)).perform();
-				//js.executeScript("$('.Igw0E.rBNOH.eGOV_.ybXk5._4EzTm.XfCBB.HVWg4._0mzm-.ZUqME')[0].scroll(0,1500000);");
-				Thread.sleep(2000);
-				pessoas = driver.findElements(By.cssSelector(".Igw0E.rBNOH.eGOV_.ybXk5._4EzTm.XfCBB.HVWg4._0mzm-.ZUqME"));
-				if (pessoas.size() == numPessoas)
-					break;
-				numPessoas = pessoas.size();
-			}
+			pessoasScroll = driver.findElements(By.cssSelector("._2dbep.qNELH.kIKUG"));
 		} catch (Exception e) {
 			System.out.println(e);
-			//mensagens.append(System.lineSeparator() + e.getMessage());			
+			// mensagens.append(System.lineSeparator() + e.getMessage());
 		}
+		if (pessoasRepetidas.size() != 0) {
+			pessoasScroll = removePessoasRepetidas(pessoasRepetidas, pessoasScroll);
+		}
+		pessoasRepetidas.addAll(pessoasScroll);
+		return pessoasScroll;
+	}
+
+	private static List<WebElement> removePessoasRepetidas(Set<WebElement> pessoasRepetidas2, List<WebElement> pessoasScroll) {
+		List<WebElement> novasPessoas = new ArrayList<WebElement>();
+		for (WebElement pessoa : pessoasScroll) {
+			if(!pessoasRepetidas2.contains(pessoa)) {
+				novasPessoas.add(pessoa);
+			}
+		}
+		return novasPessoas;
 	}
 
 	public static void verSeguidores(WebDriver driver) {
