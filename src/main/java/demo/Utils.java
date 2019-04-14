@@ -19,6 +19,7 @@ import com.google.common.io.Resources;
 public class Utils {
 
 	private final static String urlInsta = "https://www.instagram.com/accounts/login/";
+	private final static String urlInstaHome = "https://www.instagram.com/";
 	private static int curtidasTotais = 0;
 	private static int perfisTotais = 0;
 	private static StringBuilder mensagens = new StringBuilder();
@@ -31,7 +32,7 @@ public class Utils {
 		try {
 			Thread.sleep(3000);
 			while (!isValid) {
-				if (!urlInsta.equalsIgnoreCase(driver.getCurrentUrl())) {
+				if (urlInstaHome.equalsIgnoreCase(driver.getCurrentUrl())) {
 					isValid = true;
 				}
 			}
