@@ -53,7 +53,7 @@ public class Utils {
 			URL jqueryUrl = Resources.getResource("jquery.min.js");
 			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 			js.executeScript(jqueryText);
-			driver.findElement(By.cssSelector(".zV_Nj")).click();
+			driver.findElement(By.cssSelector("._0mzm-.sqdOP.yWX7d._8A5w5")).click();
 			for (int i = 0; i <= 300; i++) {
 				pessoas = scroll(driver);
 				perfisTotais += pessoas.size();
