@@ -67,11 +67,12 @@ public class Utils {
 							for (String handle : driver.getWindowHandles()) {
 								if (!handle.equals(originalHandle)) {
 									driver.switchTo().window(handle);
+									Thread.sleep(1000);
 									if (!perfilPublico(driver)) {
 										driver.findElement(By.cssSelector(".v1Nh3.kIKUG._bz0w a")).click();
-										Thread.sleep(300);
+										Thread.sleep(1000);
 										if (possivelCurtir(driver)) {
-											Thread.sleep(500);
+											Thread.sleep(1000);
 											driver.findElement(By.cssSelector(
 													".dCJp8.afkep._0mzm- .glyphsSpriteHeart__outline__24__grey_9.u-__7"))
 													.click();
@@ -193,7 +194,7 @@ public class Utils {
 			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 			js.executeScript(jqueryText);
 			Thread.sleep(1500);
-			pessoasScroll = driver.findElements(By.cssSelector("._2dbep.qNELH.kIKUG"));
+			pessoasScroll = driver.findElements(By.cssSelector("._7UhW9.xLCgt.MMzan.KV-D4.fDxYl a"));
 		} catch (Exception e) {
 			System.out.println(e);
 			// mensagens.append(System.lineSeparator() + e.getMessage());
@@ -236,7 +237,7 @@ public class Utils {
 
 	public static Boolean perfilPublico(WebDriver driver) {
 		try {
-			driver.findElement(By.cssSelector(".v1Nh3.kIKUG._bz0w a"));
+			driver.findElement(By.cssSelector(".v1Nh3.kIKUG._bz0w"));
 			return false;
 		} catch (Exception e) {
 			return true;
