@@ -12,7 +12,7 @@ public class Start {
 	 * executada só é necessario remover a //
 	 */
 
-	private static String urlFoto1 = "https://www.instagram.com/p/B0fj8_fhosM/";
+	private static String urlFoto1 = "https://www.instagram.com/p/B6WngL1otOm/";
 	private static String urlFoto2 = "https://www.instagram.com/p/Bp0KUrIB6ka/";
 	private static String urlFoto3 = "https://www.instagram.com/p/BpxqideBTvM/";
 	private static String urlFoto4 = "https://www.instagram.com/p/Bpb-YOTBTDx/?taken-by=edergrauu";
@@ -21,8 +21,8 @@ public class Start {
 	private static Integer total = 0;
 
 	public static void main(String[] args) throws InterruptedException {
-		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\Guh\\Downloads\\Guilerme\\chromedriver.exe");
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Guh\\Downloads\\Guilerme\\chromedriver.exe");
+		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\olive\\Downloads\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		try {
 			Utils.logar(driver);

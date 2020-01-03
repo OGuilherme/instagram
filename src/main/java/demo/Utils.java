@@ -53,7 +53,7 @@ public class Utils {
 			URL jqueryUrl = Resources.getResource("jquery.min.js");
 			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 			js.executeScript(jqueryText);
-			driver.findElement(By.cssSelector("._0mzm-.sqdOP.yWX7d._8A5w5")).click();
+			driver.findElement(By.cssSelector(".Nm9Fw .sqdOP.yWX7d._8A5w5")).click();
 			for (int i = 0; i <= 300; i++) {
 				pessoas = scroll(driver);
 				perfisTotais += pessoas.size();
@@ -67,14 +67,14 @@ public class Utils {
 							for (String handle : driver.getWindowHandles()) {
 								if (!handle.equals(originalHandle)) {
 									driver.switchTo().window(handle);
-									Thread.sleep(1000);
+									Thread.sleep(5000);
 									if (!perfilPublico(driver)) {
 										driver.findElement(By.cssSelector(".v1Nh3.kIKUG._bz0w a")).click();
 										Thread.sleep(1000);
 										if (possivelCurtir(driver)) {
 											Thread.sleep(1000);
 											driver.findElement(By.cssSelector(
-													".dCJp8.afkep._0mzm- .glyphsSpriteHeart__outline__24__grey_9.u-__7"))
+													".glyphsSpriteHeart__outline__24__grey_9.u-__7"))
 													.click();
 											curtidasTotais++;
 										}
