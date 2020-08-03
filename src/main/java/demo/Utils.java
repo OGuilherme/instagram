@@ -1,5 +1,6 @@
 package demo;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
+import com.gargoylesoftware.htmlunit.javascript.host.Console;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 
@@ -73,8 +75,8 @@ public class Utils {
 										Thread.sleep(1000);
 										if (possivelCurtir(driver)) {
 											Thread.sleep(1000);
-											driver.findElement(By.cssSelector(
-													".glyphsSpriteHeart__outline__24__grey_9.u-__7"))
+											driver.findElement(
+													By.cssSelector(".glyphsSpriteHeart__outline__24__grey_9.u-__7"))
 													.click();
 											curtidasTotais++;
 										}
@@ -166,7 +168,7 @@ public class Utils {
 
 	public static void scrollSeguidores(WebDriver driver) {
 		try {
-			List<WebElement> pessoas = driver.findElements(By.cssSelector(".rKm58._6xe7A .PZuss .wo9IH"));
+			List<WebElement> pessoas = driver.findElements(By.cssSelector(".FPmhX.notranslate._0imsa"));
 			int numPessoas = pessoas.size();
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			URL jqueryUrl = Resources.getResource("jquery.min.js");
@@ -206,10 +208,11 @@ public class Utils {
 		return pessoasScroll;
 	}
 
-	private static List<WebElement> removePessoasRepetidas(Set<WebElement> pessoasRepetidas2, List<WebElement> pessoasScroll) {
+	private static List<WebElement> removePessoasRepetidas(Set<WebElement> pessoasRepetidas2,
+			List<WebElement> pessoasScroll) {
 		List<WebElement> novasPessoas = new ArrayList<WebElement>();
 		for (WebElement pessoa : pessoasScroll) {
-			if(!pessoasRepetidas2.contains(pessoa)) {
+			if (!pessoasRepetidas2.contains(pessoa)) {
 				novasPessoas.add(pessoa);
 			}
 		}
@@ -219,8 +222,14 @@ public class Utils {
 	public static void verSeguidores(WebDriver driver) {
 		try {
 			Thread.sleep(1500);
-			List<WebElement> menus = driver.findElements(By.cssSelector(".-nal3"));
-			menus.get(1).click();
+			List<WebElement> menus = driver.findElements(By.cssSelector("._81NM2"));
+			List<WebElement> menus1 = driver.findElements(By.cssSelector(".-nal3"));
+			if (menus.size() > 0) {
+				menus.get(1).click();
+			}
+			if (menus1.size() > 0) {
+				menus1.get(1).click();
+			}
 		} catch (Exception e) {
 			mensagens.append(System.lineSeparator() + e.getMessage());
 		}
@@ -242,5 +251,76 @@ public class Utils {
 		} catch (Exception e) {
 			return true;
 		}
+	}
+
+	public static Set<String> getAllNames(WebDriver driver) {
+		Set<String> users = new HashSet<String>();
+		driver.get("https://www.instagram.com/guhslack/");
+		try {
+			Thread.sleep(1500);
+			verSeguidores(driver);
+			Thread.sleep(1500);
+
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+
+			URL jqueryUrl = Resources.getResource("jquery.min.js");
+			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
+			js.executeScript(jqueryText);
+			for (int index = 0; index < 500; index++) {
+				js.executeScript("$('.FPmhX.notranslate._0imsa').focus()");
+
+				Thread.sleep(5000);
+				List<WebElement> test = driver.findElements(By.cssSelector(".FPmhX.notranslate._0imsa"));
+				System.out.println(index + " - " + test.size());
+			}
+			List<WebElement> pessoas = driver.findElements(By.cssSelector(".FPmhX.notranslate._0imsa"));
+			for (WebElement pessoa : pessoas) {
+				users.add(pessoa.getAttribute("text"));
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return users;
+	}
+
+	public static void commentPost(WebDriver driver, List<String> usersToComment, String urlPost, int numUsers)
+			throws IOException {
+		int jaMarcados = 0;
+
+		driver.get(urlPost);
+		WebElement textArea = null;
+		WebElement button = null;
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		URL jqueryUrl = Resources.getResource("jquery.min.js");
+		String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
+		js.executeScript(jqueryText);
+
+		for (String user : usersToComment) {
+			try {
+				Thread.sleep(3000);
+				textArea = driver.findElement(By.className("Ypffh"));
+				Thread.sleep(1000);
+				textArea.sendKeys(user);
+				Thread.sleep(2000);
+				js.executeScript("$('.KAWZr').click()");
+				jaMarcados++;
+				if (jaMarcados == numUsers) {
+					button = driver.findElement(By.cssSelector(".sqdOP.yWX7d.y3zKF"));
+					Thread.sleep(20000);
+					button.sendKeys(Keys.ENTER);
+					Thread.sleep(5000);
+					jaMarcados = 0;
+					driver.get(urlPost);
+					Thread.sleep(1000);
+					js = (JavascriptExecutor) driver;
+					jqueryUrl = Resources.getResource("jquery.min.js");
+					jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
+					js.executeScript(jqueryText);
+				}
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+		}
+
 	}
 }
