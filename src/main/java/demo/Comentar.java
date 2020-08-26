@@ -14,12 +14,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class Comentar {
-	@SuppressWarnings("unused")
 	private static Set<String> users;
 	private static List<String> usersToComment = new ArrayList<String>();
 	private static String urlPost = "https://www.instagram.com/p/CDCndHohqJv/";
-	private static String patchDriver = "C:\\Users\\olive\\Downloads\\chromedriver.exe";
-	private static String pathTxt = "C:\\Users\\olive\\Documents\\seguidores.txt";
+	private static String patchDriver = "C:\\Users\\\tavo_\\Downloads\\chromedriver.exe";
+	private static String pathTxt = "C:\\Users\\tavo_\\Documents\\seguidores.txt";
+	//private static String patchDriver = "C:\\Users\\olive\\Downloads\\chromedriver.exe";
+	//private static String pathTxt = "C:\\Users\\olive\\Documents\\seguidores.txt";
 	private static Integer quantidadeUsuarios = 2;
 
 	public static void main(String[] args) throws InterruptedException, IOException {
