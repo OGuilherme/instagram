@@ -3,8 +3,10 @@ package demo;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import org.openqa.selenium.By;
@@ -14,7 +16,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import com.gargoylesoftware.htmlunit.javascript.host.Console;
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
 
@@ -255,7 +256,7 @@ public class Utils {
 
 	public static Set<String> getAllNames(WebDriver driver) {
 		Set<String> users = new HashSet<String>();
-		driver.get("https://www.instagram.com/guhslack/");
+		driver.get("https://www.instagram.com/gus2rodas/");
 		try {
 			Thread.sleep(1500);
 			verSeguidores(driver);
@@ -266,7 +267,7 @@ public class Utils {
 			URL jqueryUrl = Resources.getResource("jquery.min.js");
 			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 			js.executeScript(jqueryText);
-			for (int index = 0; index < 500; index++) {
+			for (int index = 0; index < 1010; index++) {
 				js.executeScript("$('.FPmhX.notranslate._0imsa').focus()");
 
 				Thread.sleep(5000);
@@ -286,36 +287,47 @@ public class Utils {
 	public static void commentPost(WebDriver driver, List<String> usersToComment, String urlPost, int numUsers)
 			throws IOException {
 		int jaMarcados = 0;
+		Random rand = new Random(); //instance of random class
+	    int upperbound = 1000000;
 
 		driver.get(urlPost);
 		WebElement textArea = null;
-		WebElement button = null;
+		List<WebElement> button = null;
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		URL jqueryUrl = Resources.getResource("jquery.min.js");
 		String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 		js.executeScript(jqueryText);
-
+		Calendar start = Calendar.getInstance();
+		Calendar end = Calendar.getInstance();
+		end.add(Calendar.MINUTE, 10);
 		for (String user : usersToComment) {
 			try {
-				Thread.sleep(3000);
+				Thread.sleep(9000/numUsers);
 				textArea = driver.findElement(By.className("Ypffh"));
-				Thread.sleep(1000);
+				Thread.sleep(3000/numUsers);
 				textArea.sendKeys(user);
-				Thread.sleep(2000);
+				Thread.sleep(6000/numUsers);
 				js.executeScript("$('.KAWZr').click()");
 				jaMarcados++;
 				if (jaMarcados == numUsers) {
-					button = driver.findElement(By.cssSelector(".sqdOP.yWX7d.y3zKF"));
-					Thread.sleep(20000);
-					button.sendKeys(Keys.ENTER);
-					Thread.sleep(5000);
+					textArea.sendKeys(" "+rand.nextInt(upperbound));
+					button = driver.findElements(By.cssSelector(".sqdOP.yWX7d.y3zKF"));
+					Thread.sleep(15000/numUsers);
+					button.get(button.size()-1).sendKeys(Keys.ENTER);
+					Thread.sleep(5000/numUsers);
 					jaMarcados = 0;
 					driver.get(urlPost);
-					Thread.sleep(1000);
+					Thread.sleep(3000/numUsers);
 					js = (JavascriptExecutor) driver;
 					jqueryUrl = Resources.getResource("jquery.min.js");
 					jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 					js.executeScript(jqueryText);
+					if(start.after(end)) {
+						Thread.sleep(120000);
+						start = Calendar.getInstance();
+						end = Calendar.getInstance();
+						end.add(Calendar.MINUTE, 10);
+					}
 				}
 			} catch (Exception e) {
 				System.out.println(e);
