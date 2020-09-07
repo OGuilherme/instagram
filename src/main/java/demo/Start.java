@@ -19,13 +19,15 @@ public class Start {
 	private static String urlFoto5 = "https://www.instagram.com/p/BoUV3nHlVQu/?taken-by=vinicius_said";
 	private static String urlFoto6 = "https://www.instagram.com/p/BoJrjl-nBFZ/?taken-by=lucasmotovlog.oficial";
 	private static Integer total = 0;
+	private static String usuario = "";
+	private static String senha = "";
 
 	public static void main(String[] args) throws InterruptedException {
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\Guh\\Downloads\\Guilerme\\chromedriver.exe");
 		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\olive\\Downloads\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		try {
-			Utils.logar(driver);
+			Utils.logar(driver, usuario, senha);
 			total = Utils.curtidores(driver, urlFoto1, total);
 //			if (total <= 1500)
 //				total = Utils.curtidores(driver, urlFoto2, total);

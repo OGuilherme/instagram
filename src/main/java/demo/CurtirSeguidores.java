@@ -19,6 +19,8 @@ public class CurtirSeguidores {
 	private static String urlFoto5 = "https://www.instagram.com/arnondograu_/";
 	private static String urlFoto6 = "https://www.instagram.com/mcrick/";
 	private static Integer total = 0;
+	private static String usuario = "";
+	private static String senha = "";
 
 	public static void main(String[] args) throws InterruptedException {
 		WebDriver driver = null;
@@ -26,7 +28,7 @@ public class CurtirSeguidores {
 			//System.setProperty("webdriver.chrome.driver", "C:\\Users\\Guh\\Downloads\\Guilerme\\chromedriver.exe");
 			System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
 			driver = new ChromeDriver();
-			Utils.logar(driver);
+			Utils.logar(driver, usuario, senha);
 			if (total <= 1500)
 				total = Utils.curtidores(urlFoto1, driver, 0);
 			if (total <= 1500)

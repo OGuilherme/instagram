@@ -22,26 +22,32 @@ import com.google.common.io.Resources;
 public class Utils {
 
 	private final static String urlInsta = "https://www.instagram.com/accounts/login/";
-	private final static String urlInstaHome = "https://www.instagram.com/";
 	private static int curtidasTotais = 0;
 	private static int perfisTotais = 0;
 	private static StringBuilder mensagens = new StringBuilder();
 	private static List<WebElement> pessoas = new ArrayList<WebElement>();
 	private static Set<WebElement> pessoasRepetidas = new HashSet<WebElement>();
 
-	public static void logar(WebDriver driver) {
+	public static void logar(WebDriver driver, String usuario, String senha) {
 		Boolean isValid = false;
 		driver.get(urlInsta);
 		try {
 			Thread.sleep(3000);
+			List<WebElement> input = null;
+			input = driver.findElements(By.cssSelector("._2hvTZ.pexuQ.zyHYP"));
+			input.get(0).sendKeys(usuario);
+			input.get(1).sendKeys(senha);
+			WebElement button = driver.findElement(By.cssSelector(".sqdOP.L3NKy.y3zKF"));
+			button.sendKeys(Keys.ENTER);
 			while (!isValid) {
-				if (urlInstaHome.equalsIgnoreCase(driver.getCurrentUrl())) {
+				if (!urlInsta.equalsIgnoreCase(driver.getCurrentUrl())) {
 					isValid = true;
 				}
 			}
 			Thread.sleep(3000);
+			System.out.println("Logou com sucesso");
 		} catch (Exception e) {
-			System.out.println(e);
+			System.out.println("Erro ao tentar logar./n" + e.getMessage());
 			// mensagens.append(System.lineSeparator() + e.getMessage());
 		}
 	}
@@ -287,6 +293,7 @@ public class Utils {
 	public static void commentPost(WebDriver driver, List<String> usersToComment, String urlPost, int numUsers)
 			throws IOException {
 		int jaMarcados = 0;
+		int comentariosFeitos = 0;
 		Random rand = new Random(); //instance of random class
 	    int upperbound = 1000000;
 
@@ -299,6 +306,7 @@ public class Utils {
 		js.executeScript(jqueryText);
 		Calendar start = Calendar.getInstance();
 		Calendar end = Calendar.getInstance();
+		System.out.println("Começou a comentar");
 		end.add(Calendar.MINUTE, 10);
 		for (String user : usersToComment) {
 			try {
@@ -310,10 +318,11 @@ public class Utils {
 				js.executeScript("$('.KAWZr').click()");
 				jaMarcados++;
 				if (jaMarcados == numUsers) {
-					textArea.sendKeys(" "+rand.nextInt(upperbound));
+					textArea.sendKeys(" "+rand.nextInt(upperbound) + " #galo");
 					button = driver.findElements(By.cssSelector(".sqdOP.yWX7d.y3zKF"));
 					Thread.sleep(15000/numUsers);
 					button.get(button.size()-1).sendKeys(Keys.ENTER);
+					System.out.println("Comentou "+comentariosFeitos+" vezes");
 					Thread.sleep(5000/numUsers);
 					jaMarcados = 0;
 					driver.get(urlPost);
@@ -323,14 +332,16 @@ public class Utils {
 					jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 					js.executeScript(jqueryText);
 					if(start.after(end)) {
+						System.out.println("Começou a pausa de 10 minutos");
 						Thread.sleep(120000);
 						start = Calendar.getInstance();
 						end = Calendar.getInstance();
 						end.add(Calendar.MINUTE, 10);
+						System.out.println("Terminou a pausa de 10 minutos");
 					}
 				}
 			} catch (Exception e) {
-				System.out.println(e);
+				System.out.println("Aconteceu um erro enquanto o tentava comentar./n");
 			}
 		}
 
