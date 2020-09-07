@@ -16,12 +16,13 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class Comentar {
-	@SuppressWarnings("unused")
 	private static Set<String> users;
 	private static List<String> usersToComment = new ArrayList<String>();
 	private static String urlPost = "https://www.instagram.com/p/CDCndHohqJv/";
-	private static String patchDriver = "C:\\Users\\olive\\Downloads\\chromedriver.exe";
-	private static String pathTxt = "C:\\Users\\olive\\Documents\\seguidores.txt";
+	private static String patchDriver = "C:\\Users\\\tavo_\\Downloads\\chromedriver.exe";
+	private static String pathTxt = "C:\\Users\\tavo_\\Documents\\seguidores.txt";
+	//private static String patchDriver = "C:\\Users\\olive\\Downloads\\chromedriver.exe";
+	//private static String pathTxt = "C:\\Users\\olive\\Documents\\seguidores.txt";
 	private static Integer quantidadeUsuarios = 2;
 	private static String usuario = "";
 	private static String senha = "";
