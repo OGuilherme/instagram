@@ -12,7 +12,7 @@ public class CurtirSeguidores {
 	 * executada só é necessario remover a //
 	 */
 
-	private static String urlFoto1 = "https://www.instagram.com/brno13/";
+	private static String urlFoto1 = "https://www.instagram.com/p/CHMga8EA-qg/";
 	private static String urlFoto2 = "https://www.instagram.com/aln1001/";
 	private static String urlFoto3 = "https://www.instagram.com/dgdigoo/";
 	private static String urlFoto4 = "https://www.instagram.com/rex2501/";
@@ -25,25 +25,15 @@ public class CurtirSeguidores {
 	public static void main(String[] args) throws InterruptedException {
 		WebDriver driver = null;
 		try {
-			//System.setProperty("webdriver.chrome.driver", "C:\\Users\\Guh\\Downloads\\Guilerme\\chromedriver.exe");
+			//System.setProperty("webdriver.chrome.driver", "C:\\Users\\olive\\Downloads\\chromedriver.exe");
 			System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
 			driver = new ChromeDriver();
 			Utils.logar(driver, usuario, senha);
 			if (total <= 1500)
 				total = Utils.curtidores(urlFoto1, driver, 0);
-			if (total <= 1500)
-				total = Utils.curtidores(urlFoto2, driver, total);
-			if (total <= 1500)
-				total = Utils.curtidores(urlFoto3, driver, total);
-			if (total <= 1500)
-				total = Utils.curtidores(urlFoto4, driver, total);
-			if (total <= 1500)
-				total = Utils.curtidores(urlFoto5, driver, total);
-			if (total <= 1500)
-				total = Utils.curtidores(urlFoto6, driver, total);
 		} catch (Exception e) {
 			System.out.println(e);
-			// Email.enviarEmail(e+"");
+			//Email.enviarEmail(e+"");
 		} finally {
 			System.out.println("Foram curtidas " + total + " fotos");
 			driver.quit();

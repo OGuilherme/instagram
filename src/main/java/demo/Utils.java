@@ -124,42 +124,17 @@ public class Utils {
 			Actions actions = new Actions(driver);
 			String originalHandle = driver.getWindowHandle();
 			verSeguidores(driver);
-			scrollSeguidores(driver);
-			List<WebElement> pessoas = driver.findElements(By.cssSelector(".FPmhX.notranslate._0imsa"));
+			List<WebElement> pessoas = driver.findElements(By.cssSelector(".FPmhX.notranslate.MBL3Z"));
 			int numPessoas = pessoas.size() - 1;
-			for (int i = 0; i <= numPessoas; i++) {
-				if (curtidasTotais > 1500) {
-					throw new Exception();
-				}
-				try {
-					actions.moveToElement(pessoas.get(i + 1)).perform();
-					String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
-					pessoas.get(i).sendKeys(selectLinkOpeninNewTab);
-					Thread.sleep(1000);
-					for (String handle : driver.getWindowHandles()) {
-						if (!handle.equals(originalHandle)) {
-							driver.switchTo().window(handle);
-							if (!perfilPublico(driver)) {
-								driver.findElement(By.cssSelector(".v1Nh3.kIKUG._bz0w a")).click();
-								Thread.sleep(300);
-								if (possivelCurtir(driver)) {
-									Thread.sleep(300);
-									driver.findElement(By.cssSelector(
-											".coreSpriteHeartOpen._0mzm-.dCJp8 .glyphsSpriteHeart__outline__24__grey_9.u-__7"))
-											.click();
-									curtidasTotais++;
-								}
-							}
-						}
-					}
-				} catch (Exception e) {
-					System.out.println("erro ao curtir");
-					// mensagens.append(System.lineSeparator() + e.getMessage());
-				} finally {
-					driver.close();
-					driver.switchTo().window(originalHandle);
-					System.out.println(curtidasTotais + ", quantidade perfis:" + perfisTotais);
-				}
+			for(int i = 0; i < 500;i++) {
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				URL jqueryUrl = Resources.getResource("jquery.min.js");
+				String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
+				js.executeScript(jqueryText);
+				js.executeScript("$('.FPmhX.notranslate.MBL3Z')["+ i*10 +"].focus();");
+				pessoas = driver.findElements(By.cssSelector(".FPmhX.notranslate.MBL3Z"));
+				numPessoas = pessoas.size() - 1;
+				curtir(driver, actions, originalHandle, numPessoas, pessoas);
 			}
 			perfisTotais += numPessoas;
 		} catch (Exception e) {
@@ -173,25 +148,66 @@ public class Utils {
 		return curtidasTotais;
 	}
 
+	
+
+	private static void curtir(WebDriver driver, Actions actions, String originalHandle, int numPessoas, List<WebElement> pessoas) throws Exception {
+		for (int i = 0; i <= numPessoas; i++) {
+			if (curtidasTotais > 1500) {
+				throw new Exception();
+			}
+			try {
+				actions.moveToElement(pessoas.get(i + 1)).perform();
+				String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
+				pessoas.get(i).sendKeys(selectLinkOpeninNewTab);
+				Thread.sleep(1000);
+				for (String handle : driver.getWindowHandles()) {
+					if (!handle.equals(originalHandle)) {
+						driver.switchTo().window(handle);
+						if (!perfilPublico(driver)) {
+							driver.findElement(By.cssSelector(".v1Nh3.kIKUG._bz0w a")).click();
+							Thread.sleep(300);
+							if (possivelCurtir(driver)) {
+								Thread.sleep(300);
+								driver.findElement(By.cssSelector(
+										".ltpMr.Slqrh .QBdPU"))
+										.click();
+								curtidasTotais++;
+								Thread.sleep(300);
+							}
+						}
+					}
+				}
+			} catch (Exception e) {
+				System.out.println("erro ao curtir");
+				// mensagens.append(System.lineSeparator() + e.getMessage());
+			} finally {
+				driver.close();
+				driver.switchTo().window(originalHandle);
+				System.out.println(curtidasTotais + ", quantidade perfis:" + perfisTotais);
+			}
+		}
+	}
+
 	public static void scrollSeguidores(WebDriver driver) {
 		try {
-			List<WebElement> pessoas = driver.findElements(By.cssSelector(".FPmhX.notranslate._0imsa"));
-			int numPessoas = pessoas.size();
+			Thread.sleep(1500);
+			List<WebElement> pessoas = driver.findElements(By.cssSelector(".FPmhX.notranslate.MBL3Z"));
+			int numPessoas = pessoas.size()-1;
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 			URL jqueryUrl = Resources.getResource("jquery.min.js");
 			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 			js.executeScript(jqueryText);
-			for (int i = 0; i < 3500; i++) {
-				js.executeScript("$('div .j6cq2')[0].scroll(0,1500000);");
+			for (int i = 0; i < 3; i++) {
 				Thread.sleep(1500);
-				pessoas = driver.findElements(By.cssSelector(".rKm58._6xe7A .PZuss .wo9IH"));
+				js.executeScript("$('.FPmhX.notranslate.MBL3Z')["+ numPessoas+"].focus();");
+				pessoas = driver.findElements(By.cssSelector(".FPmhX.notranslate.MBL3Z"));
 				if (pessoas.size() == numPessoas)
 					break;
-				numPessoas = pessoas.size();
+				numPessoas = pessoas.size()-1;
 			}
 		} catch (Exception e) {
 			System.out.println(e);
-			// mensagens.append(System.lineSeparator() + e.getMessage());
+			//mensagens.append(System.lineSeparator() + e.getMessage());
 		}
 	}
 
@@ -229,13 +245,9 @@ public class Utils {
 	public static void verSeguidores(WebDriver driver) {
 		try {
 			Thread.sleep(1500);
-			List<WebElement> menus = driver.findElements(By.cssSelector("._81NM2"));
-			List<WebElement> menus1 = driver.findElements(By.cssSelector(".-nal3"));
+			List<WebElement> menus = driver.findElements(By.cssSelector(".Nm9Fw .sqdOP.yWX7d._8A5w5"));
 			if (menus.size() > 0) {
-				menus.get(1).click();
-			}
-			if (menus1.size() > 0) {
-				menus1.get(1).click();
+				menus.get(0).click();
 			}
 		} catch (Exception e) {
 			mensagens.append(System.lineSeparator() + e.getMessage());
