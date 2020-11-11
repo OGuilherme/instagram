@@ -33,12 +33,12 @@ public class Utils {
 		driver.get(urlInsta);
 		try {
 			Thread.sleep(3000);
-			List<WebElement> input = null;
-			input = driver.findElements(By.cssSelector("._2hvTZ.pexuQ.zyHYP"));
-			input.get(0).sendKeys(usuario);
-			input.get(1).sendKeys(senha);
-			WebElement button = driver.findElement(By.cssSelector(".sqdOP.L3NKy.y3zKF"));
-			button.sendKeys(Keys.ENTER);
+			//List<WebElement> input = null;
+			//input = driver.findElements(By.cssSelector("._2hvTZ.pexuQ.zyHYP"));
+			//input.get(0).sendKeys(usuario);
+			//input.get(1).sendKeys(senha);
+			//WebElement button = driver.findElement(By.cssSelector(".sqdOP.L3NKy.y3zKF"));
+			//button.sendKeys(Keys.ENTER);
 			while (!isValid) {
 				if (!urlInsta.equalsIgnoreCase(driver.getCurrentUrl())) {
 					isValid = true;
@@ -58,59 +58,25 @@ public class Utils {
 		try {
 			Actions actions = new Actions(driver);
 			String originalHandle = driver.getWindowHandle();
-			JavascriptExecutor js = (JavascriptExecutor) driver;
-			URL jqueryUrl = Resources.getResource("jquery.min.js");
-			String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
-			js.executeScript(jqueryText);
-			driver.findElement(By.cssSelector(".Nm9Fw .sqdOP.yWX7d._8A5w5")).click();
-			for (int i = 0; i <= 300; i++) {
-				pessoas = scroll(driver);
-				perfisTotais += pessoas.size();
-				for (int j = 0; j < pessoas.size(); j++) {
-					if (curtidasTotais <= 1500) {
-						try {
-							actions.moveToElement(pessoas.get(j)).perform();
-							String selectLinkOpeninNewTab = Keys.chord(Keys.CONTROL, Keys.RETURN);
-							pessoas.get(j).sendKeys(selectLinkOpeninNewTab);
-							Thread.sleep(1000);
-							for (String handle : driver.getWindowHandles()) {
-								if (!handle.equals(originalHandle)) {
-									driver.switchTo().window(handle);
-									Thread.sleep(5000);
-									if (!perfilPublico(driver)) {
-										driver.findElement(By.cssSelector(".v1Nh3.kIKUG._bz0w a")).click();
-										Thread.sleep(1000);
-										if (possivelCurtir(driver)) {
-											Thread.sleep(1000);
-											driver.findElement(
-													By.cssSelector(".glyphsSpriteHeart__outline__24__grey_9.u-__7"))
-													.click();
-											curtidasTotais++;
-										}
-									}
-								}
-							}
-						} catch (Exception e) {
-							System.out.println("erro ao curtir");
-							// mensagens.append(System.lineSeparator() + e.getMessage());
-						} finally {
-							if (!originalHandle.equalsIgnoreCase(driver.getWindowHandle()))
-								driver.close();
-							driver.switchTo().window(originalHandle);
-							System.out.println(curtidasTotais + ", passou por: " + i + "perfis, quantidade perfis:"
-									+ perfisTotais);
-						}
-					} else {
-						throw new Exception();
-					}
-				}
+			verSeguidores(driver);
+			List<WebElement> pessoas = driver.findElements(By.cssSelector(".FPmhX.notranslate.MBL3Z"));
+			int numPessoas = pessoas.size() - 1;
+			for(int i = 0; i < 500;i++) {
+				JavascriptExecutor js = (JavascriptExecutor) driver;
+				URL jqueryUrl = Resources.getResource("jquery.min.js");
+				String jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
+				js.executeScript(jqueryText);
+				js.executeScript("$('.FPmhX.notranslate.MBL3Z')["+ i*10 +"].focus();");
+				pessoas = driver.findElements(By.cssSelector(".FPmhX.notranslate.MBL3Z"));
+				numPessoas = pessoas.size() - 1;
+				curtir(driver, actions, originalHandle, numPessoas, pessoas);
 			}
+			perfisTotais += numPessoas;
 		} catch (Exception e) {
 			System.out.println(e);
 			// mensagens.append(System.lineSeparator() + e.getMessage());
 		} finally {
-			if (!mensagens.toString().isEmpty())
-				System.out.println();
+			// if (!mensagens.toString().isEmpty())
 			// Email.enviarEmail(mensagens.toString());
 			System.out.println("curtidas: " + curtidasTotais + " e perfis: " + perfisTotais);
 		}
