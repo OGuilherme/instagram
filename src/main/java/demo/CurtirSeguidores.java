@@ -12,21 +12,21 @@ public class CurtirSeguidores {
 	 * executada só é necessario remover a //
 	 */
 
-	private static String urlFoto1 = "https://www.instagram.com/p/CHMga8EA-qg/";
-	private static String urlFoto2 = "https://www.instagram.com/aln1001/";
-	private static String urlFoto3 = "https://www.instagram.com/dgdigoo/";
-	private static String urlFoto4 = "https://www.instagram.com/rex2501/";
-	private static String urlFoto5 = "https://www.instagram.com/arnondograu_/";
-	private static String urlFoto6 = "https://www.instagram.com/mcrick/";
+	private static String urlFoto1 = "https://www.instagram.com/rickenogueira/";
+	private static String urlFoto2 = "https://www.instagram.com/p/CHTTR11AOcr/";
+	private static String urlFoto3 = "https://www.instagram.com/p/CHRPaZXLVpj/";
+	private static String urlFoto4 = "https://www.instagram.com/p/CHNqWbOAghB/";
+	private static String urlFoto5 = "https://www.instagram.com/p/CG-pQYBlU7q/";
+	private static String urlFoto6 = "https://www.instagram.com/p/CHHFeGoDQMX/";
 	private static Integer total = 0;
-	private static String usuario = "";
-	private static String senha = "";
+	private static String usuario = "guhslack";
+	private static String senha = "Slackpoker22";
 
 	public static void main(String[] args) throws InterruptedException {
 		WebDriver driver = null;
 		try {
 			//System.setProperty("webdriver.chrome.driver", "C:\\Users\\olive\\Downloads\\chromedriver.exe");
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\guolivei\\Documents\\Projetos\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "C:\\Users\\tavo_\\Documents\\seguidores.txt");
 			driver = new ChromeDriver();
 			Utils.logar(driver, usuario, senha);
 			if (total <= 1500)
