@@ -33,12 +33,12 @@ public class Utils {
 		driver.get(urlInsta);
 		try {
 			Thread.sleep(3000);
-			List<WebElement> input = null;
-			input = driver.findElements(By.cssSelector("._2hvTZ.pexuQ.zyHYP"));
-			input.get(0).sendKeys(usuario);
-			input.get(1).sendKeys(senha);
-			WebElement button = driver.findElement(By.cssSelector(".sqdOP.L3NKy.y3zKF"));
-			button.sendKeys(Keys.ENTER);
+			//List<WebElement> input = null;
+			//input = driver.findElements(By.cssSelector("._2hvTZ.pexuQ.zyHYP"));
+			//input.get(0).sendKeys(usuario);
+			//input.get(1).sendKeys(senha);
+			//WebElement button = driver.findElement(By.cssSelector(".sqdOP.L3NKy.y3zKF"));
+			//button.sendKeys(Keys.ENTER);
 			while (!isValid) {
 				if (!urlInsta.equalsIgnoreCase(driver.getCurrentUrl())) {
 					isValid = true;

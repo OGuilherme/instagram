@@ -31,30 +31,14 @@ public class Comentar {
 		WebDriver driver = null;
 		try {
 			System.setProperty("webdriver.chrome.driver", patchDriver);
-			ChromeOptions options= new ChromeOptions();
-			options.addArguments("--headless");
-			DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-			capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-			driver = new ChromeDriver(capabilities);
+			driver = new ChromeDriver();
 			Utils.logar(driver, usuario, senha);
 
 			File myObj = new File(pathTxt);
-			if (myObj.createNewFile()) {
-				try {
-					users = Utils.getAllNames(driver);
-					FileWriter myWriter = new FileWriter(pathTxt);
-					for (String user : users) {
-						myWriter.write("@" + user);
-					}
-					myWriter.close();
-				} catch (Exception e) {
-					System.out.println("Erro ao buscar lista com usuarios./n" + e.getMessage());
-				}
-			}
-			@SuppressWarnings("resource")
+			
 			BufferedReader br = new BufferedReader(new FileReader(myObj));
 
-			String[] st = br.readLine().split(",");
+			String[] st = br.readLine().split("@");
 			usersToComment = Arrays.asList(st);
 			System.out.println("Lista de usuario para comentar com: "+ usersToComment.size());
 			Utils.commentPost(driver, usersToComment, urlPost, quantidadeUsuarios);
