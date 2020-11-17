@@ -12,9 +12,9 @@ import javax.mail.internet.MimeMessage;
 
 public class Email {
 
-	private final static String email = "oliveira_guilherme1996@hotmail.com";
-	private final static String username = "guioli1996@gmail.com";
-	private final static String password = "412096Gui";
+	private final static String email = "";
+	private final static String username = "";
+	private final static String password = "";
 
 	private static Properties setProperties() {
 		Properties props = new Properties();

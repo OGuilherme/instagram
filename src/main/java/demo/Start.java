@@ -19,12 +19,12 @@ public class Start {
 	private static String urlFoto5 = "https://www.instagram.com/p/CHWVtGVhF0L/";
 	private static String urlFoto6 = "https://www.instagram.com/p/CHOCz59BZda/";
 	private static Integer total = 0;
-	private static String usuario = "mmgengenharia";
-	private static String senha = "Chupabife123";
+	private static String usuario = "";
+	private static String senha = "";
 
 	public static void main(String[] args) throws InterruptedException {
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\tavo_\\Downloads\\chromedriver\\chromedriver.exe");
-		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\olive\\Downloads\\chromedriver.exe");
+		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\tavo_\\Downloads\\chromedriver\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "C:\\Users\\olive\\Downloads\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		try {
 			Utils.logar(driver, usuario, senha);
