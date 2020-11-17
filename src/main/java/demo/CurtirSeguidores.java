@@ -19,8 +19,8 @@ public class CurtirSeguidores {
 	private static String urlFoto5 = "https://www.instagram.com/p/CG-pQYBlU7q/";
 	private static String urlFoto6 = "https://www.instagram.com/p/CHHFeGoDQMX/";
 	private static Integer total = 0;
-	private static String usuario = "guhslack";
-	private static String senha = "Slackpoker22";
+	private static String usuario = "";
+	private static String senha = "";
 
 	public static void main(String[] args) throws InterruptedException {
 		WebDriver driver = null;

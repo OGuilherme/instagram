@@ -24,8 +24,8 @@ public class Comentar {
 	//private static String patchDriver = "C:\\Users\\tavo_\\Downloads\\chromedriver\\chromedriver.exe";
 	//private static String pathTxt = "C:\\Users\\olive\\Documents\\seguidores.txt";
 	private static Integer quantidadeUsuarios = 1;
-	private static String usuario = "gus2rodas";
-	private static String senha = "Slack123";
+	private static String usuario = "";
+	private static String senha = "";
 
 	public static void main(String[] args) throws InterruptedException, IOException {
 		WebDriver driver = null;
