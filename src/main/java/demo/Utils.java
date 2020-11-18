@@ -336,6 +336,7 @@ public class Utils {
 				js.executeScript("$('.KAWZr').click()");
 				jaMarcados++;
 				if (jaMarcados == numUsers) {
+					textArea = driver.findElement(By.className("Ypffh"));
 					textArea.sendKeys(" "+rand.nextInt(upperbound));
 					button = driver.findElements(By.cssSelector(".sqdOP.yWX7d.y3zKF"));
 					Thread.sleep(15000/numUsers);
@@ -349,6 +350,7 @@ public class Utils {
 					jqueryUrl = Resources.getResource("jquery.min.js");
 					jqueryText = Resources.toString(jqueryUrl, Charsets.UTF_8);
 					js.executeScript(jqueryText);
+					start = Calendar.getInstance();
 					if(start.after(end)) {
 						System.out.println("Começou a pausa de 10 minutos");
 						Thread.sleep(120000);
@@ -359,7 +361,7 @@ public class Utils {
 					}
 				}
 			} catch (Exception e) {
-				System.out.println("Aconteceu um erro enquanto o tentava comentar./n");
+				System.out.println("Aconteceu um erro enquanto o tentava comentar./n"+e);
 			}
 		}
 
