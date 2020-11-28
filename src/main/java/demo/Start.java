@@ -23,8 +23,8 @@ public class Start {
 	private static String senha = "";
 
 	public static void main(String[] args) throws InterruptedException {
-		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\tavo_\\Downloads\\chromedriver\\chromedriver.exe");
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\olive\\Downloads\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", "D:\\instagram\\chromedriver.exe");
+		//System.setProperty("webdriver.chrome.driver", "C:\\Users\\olive\\Downloads\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		try {
 			Utils.logar(driver, usuario, senha);

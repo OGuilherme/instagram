@@ -14,8 +14,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class Comentar {
 	private static List<String> usersToComment = new ArrayList<String>();
 	private static String urlPost = "https://www.instagram.com/p/CGlah4DDt6D/";
-	private static String patchDriver = "C:\\Users\\tavo_\\Downloads\\chromedriver\\chromedriver.exe";
-	private static String pathTxt = "C:\\Users\\tavo_\\Documents\\seguidores.txt";
+	private static String patchDriver = "D:\\instagram\\chromedriver.exe";
+	private static String pathTxt = "D:\\instagram\\seguidores.txt";
 	//private static String patchDriver = "C:\\Users\\olive\\Downloads\\chromedriver.exe";
 	//private static String pathTxt = "C:\\Users\\olive\\Documents\\seguidores.txt";
 	private static Integer quantidadeUsuarios = 1;

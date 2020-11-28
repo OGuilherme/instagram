@@ -26,7 +26,7 @@ public class CurtirSeguidores {
 		WebDriver driver = null;
 		try {
 			//System.setProperty("webdriver.chrome.driver", "C:\\Users\\olive\\Downloads\\chromedriver.exe");
-			System.setProperty("webdriver.chrome.driver", "C:\\Users\\tavo_\\Documents\\seguidores.txt");
+			System.setProperty("webdriver.chrome.driver", "D:\\instagram\\chromedriver.exe");
 			driver = new ChromeDriver();
 			Utils.logar(driver, usuario, senha);
 			if (total <= 1500)
