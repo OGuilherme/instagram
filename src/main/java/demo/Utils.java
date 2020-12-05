@@ -32,7 +32,7 @@ public class Utils {
 		Boolean isValid = false;
 		driver.get(urlInsta);
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(20000);
 			//List<WebElement> input = null;
 			//input = driver.findElements(By.cssSelector("._2hvTZ.pexuQ.zyHYP"));
 			//input.get(0).sendKeys(usuario);
@@ -44,7 +44,7 @@ public class Utils {
 					isValid = true;
 				}
 			}
-			Thread.sleep(3000);
+			Thread.sleep(20000);
 			System.out.println("Logou com sucesso");
 		} catch (Exception e) {
 			System.out.println("Erro ao tentar logar./n" + e.getMessage());
@@ -56,9 +56,8 @@ public class Utils {
 		driver.get(urlFoto);
 		try {
 			verSeguidores(driver);
-			List<WebElement> pessoas = driver.findElements(By.cssSelector(".FPmhX.notranslate.MBL3Z"));
-			int numPessoas = pessoas.size() - 1;
 			Set<String> users = getAllNamesPicture(driver);
+			perfisTotais += users.size();
 			for (String user : users) {
 				if (curtidasTotais > 1500) {
 					throw new Exception();
@@ -83,7 +82,6 @@ public class Utils {
 					System.out.println(curtidasTotais + ", quantidade perfis:" + perfisTotais);
 				}
 			}
-			perfisTotais += numPessoas;
 		} catch (Exception e) {
 			System.out.println(e);
 		} finally {

@@ -12,12 +12,12 @@ public class Start {
 	 * executada só é necessario remover a //
 	 */
 	//Só arrumar essa url aqui da foto um e ja era
-	private static String urlFoto1 = "https://www.instagram.com/p/CFeoM8BFQaF/";
-	private static String urlFoto2 = "https://www.instagram.com/p/CG5c-sflUEW/";
-	private static String urlFoto3 = "https://www.instagram.com/p/CHLIEQ-lXIw/";
-	private static String urlFoto4 = "https://www.instagram.com/p/CHRAZCDhKx4/";
-	private static String urlFoto5 = "https://www.instagram.com/p/CHWVtGVhF0L/";
-	private static String urlFoto6 = "https://www.instagram.com/p/CHOCz59BZda/";
+	private static String urlFoto1 = "https://www.instagram.com/p/CIRb_y-l0b7/";
+	private static String urlFoto2 = "https://www.instagram.com/p/CIWA2_bAdLJ/";
+	private static String urlFoto3 = "https://www.instagram.com/p/CIT0h_1nd5g/";
+	private static String urlFoto4 = "https://www.instagram.com/p/CIUHD29AxhL/";
+	private static String urlFoto5 = "https://www.instagram.com/p/CITOOBilX0G/";
+	private static String urlFoto6 = "https://www.instagram.com/p/CHHFeGoDQMX/";
 	private static Integer total = 0;
 	private static String usuario = "";
 	private static String senha = "";

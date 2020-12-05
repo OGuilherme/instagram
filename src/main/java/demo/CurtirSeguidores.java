@@ -12,10 +12,10 @@ public class CurtirSeguidores {
 	 * executada só é necessario remover a //
 	 */
 
-	private static String urlFoto1 = "https://www.instagram.com/rickenogueira/";
-	private static String urlFoto2 = "https://www.instagram.com/p/CHTTR11AOcr/";
-	private static String urlFoto3 = "https://www.instagram.com/p/CHRPaZXLVpj/";
-	private static String urlFoto4 = "https://www.instagram.com/p/CHNqWbOAghB/";
+	private static String urlFoto1 = "https://www.instagram.com/p/CH-1oCGpu7E/";
+	private static String urlFoto2 = "https://www.instagram.com/p/CIGpBPLA4Q_/";
+	private static String urlFoto3 = "https://www.instagram.com/p/CILuerTBsZs/";
+	private static String urlFoto4 = "https://www.instagram.com/p/CIRjXFoHV3p/";
 	private static String urlFoto5 = "https://www.instagram.com/p/CG-pQYBlU7q/";
 	private static String urlFoto6 = "https://www.instagram.com/p/CHHFeGoDQMX/";
 	private static Integer total = 0;
