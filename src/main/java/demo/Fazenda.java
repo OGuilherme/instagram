@@ -1,12 +1,12 @@
 package demo;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class Fazenda {
 	
@@ -19,10 +19,16 @@ public class Fazenda {
 			driver = new ChromeDriver();
 			driver.get("https://afazenda.r7.com/a-fazenda-12");
 			Thread.sleep(3000);
+			List<WebElement> a = driver.findElements(By.className("voting-button--hidden"));
+			a.get(2).click();
+			driver.findElement(By.className("voting-button")).click();
+			Thread.sleep(900);
+			driver.findElement(By.className("vote-confirmation__button")).click();
+			Thread.sleep(900);
 			while(1==1) {
-				driver.findElement(By.id("561")).click();
-				Thread.sleep(500);
-				driver.findElement(By.className("voting-button")).click();
+				driver.findElement(By.id("760")).click();
+				Thread.sleep(900);
+				driver.findElement(By.className("voting-button--medium")).click();
 				Thread.sleep(900);
 				driver.findElement(By.className("vote-confirmation__button")).click();
 				Thread.sleep(900);

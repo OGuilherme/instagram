@@ -65,17 +65,7 @@ public class Utils {
 				try {
 					driver.get(urlInstaBase+user);
 					Thread.sleep(1000);
-					if (!perfilPublico(driver)) {
-						driver.findElement(By.cssSelector(".v1Nh3.kIKUG._bz0w a")).click();
-						Thread.sleep(2000);
-						if (possivelCurtir(driver)) {
-							driver.findElement(By.cssSelector(
-									".ltpMr.Slqrh .QBdPU"))
-									.click();
-							curtidasTotais++;
-							Thread.sleep(300);
-						}
-					}
+					curtirFoto(driver);
 				} catch (Exception e) {
 					System.out.println("erro ao curtir" + e);
 				} finally {
@@ -94,6 +84,7 @@ public class Utils {
 		Set<String> users = new HashSet<String>();
 		Integer acabouUsers = 0;
 		Integer numUsers = 0;
+		verSeguidores(driver);
 		try {
 			Thread.sleep(1500);
 
@@ -107,7 +98,7 @@ public class Utils {
 					break;
 				js.executeScript("$('.FPmhX.notranslate.MBL3Z').focus()");
 
-				Thread.sleep(5000);
+				Thread.sleep(2000);
 				List<WebElement> test = driver.findElements(By.cssSelector(".FPmhX.notranslate.MBL3Z"));
 				for (WebElement webElement : test) {
 					users.add(webElement.getAttribute("title"));
@@ -167,18 +158,7 @@ public class Utils {
 				for (String handle : driver.getWindowHandles()) {
 					if (!handle.equals(originalHandle)) {
 						driver.switchTo().window(handle);
-						if (!perfilPublico(driver)) {
-							driver.findElement(By.cssSelector(".v1Nh3.kIKUG._bz0w a")).click();
-							Thread.sleep(300);
-							if (possivelCurtir(driver)) {
-								Thread.sleep(300);
-								driver.findElement(By.cssSelector(
-										".ltpMr.Slqrh .QBdPU"))
-										.click();
-								curtidasTotais++;
-								Thread.sleep(300);
-							}
-						}
+						curtirFoto(driver);
 					}
 				}
 			} catch (Exception e) {
@@ -363,5 +343,83 @@ public class Utils {
 			}
 		}
 
+	}
+
+	public static void seguir(WebDriver driver, List<String> users) {
+		Integer seguindo = 0;
+		try {
+			for (String user : users) {
+				if (seguindo > 1500) {
+					throw new Exception();
+				}
+				try {
+					driver.get(urlInstaBase+user);
+					Thread.sleep(10000);
+					driver.findElement(By.cssSelector(".sqdOP.L3NKy.y3zKF")).click();
+					//driver.findElement(By.cssSelector("._5f5mN.jIbKX._6VtSN.yZn4P")).click();
+					seguindo++;
+					Thread.sleep(4000);
+					curtirFoto(driver);
+				} catch (Exception e) {
+					try {
+						driver.findElement(By.cssSelector("._5f5mN.jIbKX._6VtSN.yZn4P")).click();
+						seguindo++;
+						Thread.sleep(4000);
+						curtirFoto(driver);
+					} catch (Exception A) {
+						System.out.println("erro ao curtir" + A);
+					}
+				} finally {
+					System.out.println(seguindo);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			System.out.println("curtidas: " + curtidasTotais + " e perfis: " + perfisTotais);
+		}
+	}
+
+	private static void curtirFoto(WebDriver driver) throws InterruptedException {
+		if (!perfilPublico(driver)) {
+			driver.findElement(By.cssSelector(".v1Nh3.kIKUG._bz0w a")).click();
+			Thread.sleep(3000);
+			if (possivelCurtir(driver)) {
+				driver.findElement(By.cssSelector(
+						".ltpMr.Slqrh .QBdPU"))
+						.click();
+				curtidasTotais++;
+				Thread.sleep(1000);
+			}
+		}
+	}
+
+	public static void unfollow(WebDriver driver, List<String> users) {
+		String userAtual = "";
+		try {
+			for (String user : users) {
+				try {
+					driver.get(urlInstaBase+user);
+					userAtual = user;
+					Thread.sleep(1000);
+					List<WebElement> input = driver.findElements(By.cssSelector(".sqdOP.L3NKy._8A5w5"));
+					if(input.size() ==1) {
+						input.get(0).click();
+					}else {
+						input.get(1).click();
+					}
+					Thread.sleep(2000);
+					driver.findElement(By.cssSelector(".aOOlW.-Cab_")).click();
+					Thread.sleep(2000);
+				} catch (Exception e) {
+					System.out.println("erro no usuario "+ userAtual +": " + e);
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e);
+		} finally {
+			System.out.println("processo Finalizado");
+		}
+		
 	}
 }
